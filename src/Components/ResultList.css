@@ -1,0 +1,127 @@
+:root {
+  --primary: #0b5fff;
+  --secondary: #0bc9a7;
+  --accent: #ffd166;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --border: rgba(11, 95, 255, 0.1);
+  --shadow: 0 6px 18px rgba(9, 30, 66, 0.06);
+}
+
+/* ===== Result Page ===== */
+.result-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ===== Term Table Container ===== */
+.termtable {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ===== Collapsible Summary (Term Header) ===== */
+.termtable summary {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  padding: 16px 20px;
+  cursor: pointer;
+  background: #f0f6ff;
+  border-left: 4px solid var(--secondary);
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.termtable summary::after {
+  content: "▼";
+  font-size: 14px;
+  color: var(--secondary);
+  transition: transform 0.3s ease;
+}
+
+.termtable[open] summary::after {
+  transform: rotate(-180deg);
+}
+
+/* Remove default disclosure triangle */
+.termtable summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ===== Table Styling ===== */
+.termtable table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.termtable thead {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.termtable th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.termtable td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.termtable tbody tr:hover {
+  background-color: rgba(11, 201, 167, 0.08);
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  /* Make the table scrollable instead of collapsing it */
+  .termtable {
+    overflow-x: auto;
+  }
+
+  .termtable table {
+    min-width: 700px; /* ensure full table visible with scroll */
+    border-collapse: collapse;
+  }
+
+  /* Optional: add a soft shadow for the scrollable area */
+  .termtable::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .termtable::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 4px;
+  }
+
+  /* Tweak text for small screens */
+  .termtable th,
+  .termtable td {
+    font-size: 13px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+
+  /* Let user scroll horizontally if needed */
+  .result-page {
+    overflow-x: hidden;
+  }
+}

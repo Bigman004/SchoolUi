@@ -1,0 +1,134 @@
+/* === General Reset === */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: #f4f6fb;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* === Main Container === */
+.max-w-md {
+  max-width: 450px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* === Heading === */
+.text-2xl {
+  font-size: 1.8rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-2xl.font-semibold.mb-4.text-center {
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+}
+
+/* === Form Styles === */
+.space-y-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.border {
+  border: 1px solid #d1d5db;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.border:focus,
+textarea:focus,
+input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
+/* === Button Styles === */
+.bg-blue-600 {
+  background-color: #2563eb;
+}
+
+.bg-blue-600:hover {
+  background-color: #1d4ed8;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.transition {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* === Status Message === */
+.text-center.mt-3.font-medium {
+  margin-top: 0.75rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+/* Success/Error Highlight (optional enhancement) */
+.text-center.mt-3.font-medium:contains("✅") {
+  color: #10b981;
+}
+
+.text-center.mt-3.font-medium:contains("❌") {
+  color: #ef4444;
+}
