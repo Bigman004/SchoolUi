@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import { getTeacher } from "../Service/Service";
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [teacher, setTeacher] = useState({});
+  useEffect(() => {
+    async function getTeacherDetails() {
+      const response = await getTeacher();
+      setTeacher(response);
+      return response;
+    }
+    getTeacherDetails();
+  }, []);
+  console.log(teacher);
 
   return (
     <nav className="main-navbar">
@@ -32,6 +43,9 @@ const Nav = () => {
 
         <Link to="/add_student">➕ Add Student</Link>
         <Link to="/result_page">📊 Results</Link>
+        <Link to={`/change-password/${teacher?.user?.registrationNumber}`}>
+          change password
+        </Link>
       </div>
       <div className="welcome-text">Welcome Teacher</div>
       <label htmlFor="sidebar-active" className="open-sidebar-button">

@@ -93,6 +93,23 @@ export async function postStudentDetails(student) {
   });
   return response;
 }
+export async function changeUserPassword(user, password) {
+  const response = await Service.post(
+    `/change_password?password=${password}`,
+    user,
+    {
+      withCredentials: true,
+    }
+  );
+  return response;
+}
+
+export async function getTeacher() {
+  const response = await Service.get("teacher/teacherInfo", {
+    withCredentials: true,
+  });
+  return response.data;
+}
 export const listStudent = () => {
   return axios.get(REST_API_BASE_URL + "/teacher/", {
     withCredentials: true,

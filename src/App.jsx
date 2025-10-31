@@ -8,6 +8,7 @@ import Result from "./Components/Result";
 import Student from "./Components/Student";
 import EditProfile from "./Components/EditProfile";
 import ResultList from "./Components/ResultList";
+import ChangePassword from "./Components/ChangePassword";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -25,13 +26,17 @@ function App() {
       <Router>
         <section></section>
         <Routes>
-          <Route path="/" element={<Login />} />
           <Route path="/teacher_page" element={<TeacherPage />} />
           <Route path="/result/:id" element={<Result />} />
           <Route path="/add_student" element={<AddStudent />} />
           <Route path="/student" element={<Student />} />
           <Route path="/edit/:id" element={<EditProfile />} />
           <Route path="/result_page" element={<ResultList />} />
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/change-password/:teacherRegNo"
+            element={<ChangePassword />}
+          />
         </Routes>
       </Router>
     </>
