@@ -44,7 +44,7 @@ const Nav = () => {
         <Link to="/add_student">➕ Add Student</Link>
         <Link to="/result_page">📊 Results</Link>
         <Link to={`/change-password/${teacher?.user?.registrationNumber}`}>
-          change password
+          🔐 change password
         </Link>
       </div>
       <div className="welcome-text">Welcome Teacher</div>
