@@ -27,7 +27,7 @@ export default function AddStudent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/teacher/add_student",
+        "https://java-application-latest-ywhd.onrender.com/teacher/add_student",
         student,
         {
           withCredentials: true,
