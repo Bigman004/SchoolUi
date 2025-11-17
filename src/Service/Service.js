@@ -8,17 +8,26 @@ const Service = axios.create({
 
 Service.interceptors.request.use(
   (config) => {
+    // Get token from localStorage
+    const token = localStorage.getItem("token"); // Adjust the key name as needed
+
+    // Add token to headers if it exists
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
     console.log("Request:", {
       method: config.method?.toUpperCase(),
       url: config.url,
       data: config.data,
       headers: config.headers,
     });
+
     return config;
   },
   (error) => {
     console.error("Request Error: ", error);
-    Promise.reject(error);
+    return Promise.reject(error); // Fixed: added 'return'
   }
 );
 
@@ -61,7 +70,7 @@ export const postLoginDetails2 = async (regNo, password) => {
       withCredentials: true,
     }
   );
-  return response.data;
+  return response;
 };
 export const getStudentResult = async (id) => {
   const response = await Service.get("/result/{id}", {

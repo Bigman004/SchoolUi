@@ -47,9 +47,10 @@ const Login = () => {
                       password
                     );
                     console.log(response);
-                    if (response === "login successful")
+                    if (response.status === 200) {
                       navigate("/teacher_page");
-                    else setLoginMessage("invalid credentials");
+                      localStorage.setItem("token", response.data);
+                    } else setLoginMessage("invalid credentials");
                   }
                   postData();
                 } catch (error) {
