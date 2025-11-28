@@ -70,7 +70,7 @@ export const postLoginDetails2 = async (regNo, password) => {
       withCredentials: true,
     }
   );
-  return response.data;
+  return response;
 };
 export const getStudentResult = async (id) => {
   const response = await Service.get("/result/{id}", {
