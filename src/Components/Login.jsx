@@ -39,22 +39,25 @@ const Login = () => {
           </div>
           <div className="action-section">
             <button
-              onClick={() => {
+              onClick={async () => {
                 try {
-                  async function postData() {
-                    const response = await postLoginDetails2(
-                      registrationNumber,
-                      password
-                    );
-                    console.log(response);
-                    if (response.status === 200) {
-                      navigate("/teacher_page");
-                      localStorage.setItem("token", response.data);
-                    } else setLoginMessage("invalid credentials");
+                  const response = await postLoginDetails2(
+                    registrationNumber,
+                    password
+                  );
+
+                  console.log("FULL RESPONSE:", response);
+                  // This will show:
+                  // {data: ..., status: 200, headers: ..., config: ...}
+
+                  if (response.status === 200) {
+                    localStorage.setItem("token", response.data);
+                    navigate("/teacher_page");
+                  } else {
+                    setLoginMessage("invalid credentials");
                   }
-                  postData();
                 } catch (error) {
-                  console.error("login failed");
+                  console.error("login failed", error);
                   alert("invalid username or password");
                 }
               }}
