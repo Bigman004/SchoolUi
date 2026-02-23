@@ -10,10 +10,10 @@ export const TeacherPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await listStudent();
-      console.log(response.data);
-      setTeacher(response.data.teacher);
-      setStudentList(response.data.list);
+      const response = await listStudent2();
+      console.log(response);
+      setTeacher(response.teacher);
+      setStudentList(response.list);
     }
     fetchData();
   }, []);

@@ -28,7 +28,7 @@ Service.interceptors.request.use(
   (error) => {
     console.error("Request Error: ", error);
     return Promise.reject(error); // Fixed: added 'return'
-  }
+  },
 );
 
 Service.interceptors.response.use(
@@ -48,7 +48,7 @@ Service.interceptors.response.use(
       data: error.response?.data,
     });
     return Promise.reject(error);
-  }
+  },
 );
 
 export const listStudent2 = async () => {
@@ -68,7 +68,7 @@ export const postLoginDetails2 = async (regNo, password) => {
     },
     {
       withCredentials: true,
-    }
+    },
   );
   return response;
 };
@@ -108,7 +108,7 @@ export async function changeUserPassword(user, password) {
     user,
     {
       withCredentials: true,
-    }
+    },
   );
   return response;
 }
@@ -133,7 +133,7 @@ export const postLoginDetails = (regNo, password) => {
       registrationNumber: regNo,
       password: password,
     },
-    { withCredentials: true }
+    { withCredentials: true },
   );
 };
 
