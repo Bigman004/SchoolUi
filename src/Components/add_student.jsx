@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AddStudent.css";
 import Nav from "./Nav";
+import { addStudent } from "../Service/Service";
 
 export default function AddStudent() {
   const [student, setStudent] = useState({
@@ -26,13 +27,7 @@ export default function AddStudent() {
     setStatus({ loading: true, message: "" });
 
     try {
-      const response = await axios.post(
-        "https://java-application-latest-ywhd.onrender.com/teacher/add_student",
-        student,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await addStudent(student);
 
       setStatus({ loading: false, message: "✅ Student added successfully!" });
       setStudent({

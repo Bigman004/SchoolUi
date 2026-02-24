@@ -119,6 +119,12 @@ export async function getTeacher() {
   });
   return response.data;
 }
+export async function addStudent() {
+  const response = await Service.post("teacher/add_student", {
+    withCredentials: true,
+  });
+  return response.data;
+}
 export const listStudent = () => {
   return axios.get(REST_API_BASE_URL + "/teacher/", {
     withCredentials: true,
@@ -148,4 +154,5 @@ export const submitStudent = () => {
     withCredentials: true,
   });
 };
+
 export default Service;
