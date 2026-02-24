@@ -41,7 +41,9 @@
   border: 1px solid #d1d5db;
   border-radius: 10px;
   padding: 10px 15px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .login-page .input img {
@@ -87,7 +89,9 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .login-page .action-section button:hover {
@@ -100,7 +104,6 @@
   text-align: center;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #dc2626;
 }
 
 /* Responsive */

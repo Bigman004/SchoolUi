@@ -2,7 +2,7 @@ import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 
 const Service = axios.create({
-  baseURL: "https://java-application-latest-ywhd.onrender.com",
+  baseURL: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -82,7 +82,7 @@ export const listResult = async () => {
   const response = await Service.get("/result/", {
     withCredentials: true,
   });
-  return response;
+  return response.data;
 };
 export async function postResultbyterm(id, term, result) {
   const response = await Service.post("result/" + id + "/" + term, result, {

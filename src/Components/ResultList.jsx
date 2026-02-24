@@ -8,22 +8,20 @@ const ResultList = () => {
   useEffect(() => {
     async function returnList() {
       const response = await listResult();
-      console.log(response.data[0]);
-      setList(response.data);
+      console.log(response);
+      setList(response);
     }
     returnList();
   }, []);
-
   console.log(list);
-
   return (
     <>
       <Nav />
       <div className="result-page">
-        {list.map((termList, index) => (
+        {list?.map((termList, index) => (
           <div className="termtable" key={index}>
             <details open>
-              <summary>{termList[index].term}</summary>
+              <summary>{termList[index]?.term}</summary>
               <table>
                 <thead>
                   <tr>

@@ -41,11 +41,11 @@ const Login = () => {
             <button
               onClick={async () => {
                 try {
+                  setLoginMessage("Logging in...");
                   const response = await postLoginDetails2(
                     registrationNumber,
-                    password
+                    password,
                   );
-
                   console.log("FULL RESPONSE:", response);
                   // This will show:
                   // {data: ..., status: 200, headers: ..., config: ...}
@@ -59,14 +59,15 @@ const Login = () => {
                 } catch (error) {
                   console.error("login failed", error);
                   alert("invalid username or password");
+                  setLoginMessage("");
                 }
               }}
             >
               Login
             </button>
           </div>
+          <div className="login-message"> {loginMessage}</div>
         </div>
-        <div className="login-message">{loginMessage}</div>
       </div>
     </>
   );
