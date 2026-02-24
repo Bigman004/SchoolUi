@@ -119,7 +119,7 @@ export async function getTeacher() {
   });
   return response.data;
 }
-export async function addStudent() {
+export async function addStudent(student) {
   const response = await Service.post("teacher/add_student", student, {
     withCredentials: true,
   });
