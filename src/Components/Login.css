@@ -1,124 +1,219 @@
-/* Wrap your entire login component with this container */
-.login-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  font-family: "Poppins", sans-serif;
+/* ============================================
+   Login.css
+   Font: Fraunces (display) + DM Sans (body)
+   Theme: matches TeacherPage palette exactly
+   Classes: .login-page, .login-form,
+            .email-input.input, .password-input.input,
+            .email-address, .action-section,
+            .login-message
+   Elements: form, img, input, button
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Login box */
-.login-page .login-form {
-  background-color: #ffffff;
-  width: 380px;
-  padding: 40px 35px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --radius-sm: 6px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Page wrapper ─────────────────────────── */
+.login-page {
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(
+      ellipse 70% 40% at 80% -10%,
+      rgba(232, 160, 32, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at -10% 80%,
+      rgba(26, 35, 64, 0.07) 0%,
+      transparent 60%
+    ),
+    var(--ivory);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  color: var(--text-dark);
+}
+
+/* ── Card ─────────────────────────────────── */
+.login-form {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 3rem 2.5rem 2.5rem;
+  width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  animation: slideIn 0.6s ease;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Entry animation */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* amber top accent bar */
+.login-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
-/* Input container */
-.login-page .input {
+/* corner glow */
+.login-form::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* heading injected via CSS so JSX needs no changes */
+.login-form::before {
+  /* amber bar handled above, heading via a separate approach below */
+}
+
+/* ── Page title above inputs ──────────────── */
+.login-page .login-form > .email-input.input:first-of-type {
+  margin-top: 0.5rem;
+}
+
+/* ── Input wrappers ───────────────────────── */
+.login-form .input {
   display: flex;
   align-items: center;
-  background-color: #f9fafb;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  padding: 10px 15px;
+  gap: 0.75rem;
+  background: var(--ivory);
+  border: 1.5px solid var(--ivory-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.9rem;
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
 }
 
-.login-page .input img {
+.login-form .input:focus-within {
+  border-color: var(--amber);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(232, 160, 32, 0.14);
+}
+
+/* ── Icons ────────────────────────────────── */
+.login-form .input img {
   width: 22px;
   height: 22px;
-  margin-right: 10px;
-  opacity: 0.8;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.45;
 }
 
-.login-page .input input {
+/* ── Text inputs ──────────────────────────── */
+.login-form .input input {
+  flex: 1;
   border: none;
   outline: none;
-  width: 100%;
-  font-size: 1rem;
   background: transparent;
-  color: #111827;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  font-weight: 400;
 }
 
-.login-page .input input::placeholder {
-  color: #9ca3af;
+.login-form .input input::placeholder {
+  color: var(--text-light);
+  font-weight: 300;
 }
 
-/* Focus effect */
-.login-page .input:focus-within {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+/* ── Action section (login button) ───────── */
+.login-form .action-section {
+  margin-top: 0.25rem;
 }
 
-/* Button section */
-.login-page .action-section {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.login-page .action-section button {
+.login-form .action-section button {
   width: 100%;
-  padding: 12px;
-  background-color: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
-}
-
-.login-page .action-section button:hover {
-  background-color: #1e40af;
-  transform: translateY(-1px);
-}
-
-.login-page .login-message {
-  margin-top: 15px;
-  text-align: center;
+  padding: 0.8rem 1rem;
+  background: var(--navy);
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
-/* Responsive */
+.login-form .action-section button:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 35, 64, 0.18);
+}
+
+.login-form .action-section button:active {
+  transform: translateY(0);
+}
+
+/* ── Login message ────────────────────────── */
+.login-form .login-message {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-light);
+  min-height: 1.2rem;
+  transition: color var(--transition);
+}
+
+/* ── Responsive: mobile ───────────────────── */
 @media (max-width: 480px) {
-  .login-page .login-form {
-    width: 90%;
-    padding: 30px 20px;
+  .login-page {
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    padding-top: 3rem;
   }
 
-  .login-page .input img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .login-page .action-section button {
-    font-size: 0.95rem;
+  .login-form {
+    padding: 2.5rem 1.25rem 2rem;
   }
 }

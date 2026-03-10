@@ -1,0 +1,269 @@
+/* ============================================
+   ReviewAttendanceDate.css
+   All selectors are strictly scoped to their
+   parent class — no global element overrides.
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --green: #2d7a4f;
+  --green-soft: rgba(45, 122, 79, 0.12);
+  --red: #b33a3a;
+  --red-soft: rgba(179, 58, 58, 0.1);
+  --radius-sm: 6px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Page wrapper ─────────────────────────── */
+.attendance-Sheet {
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(
+      ellipse 70% 40% at 80% -10%,
+      rgba(232, 160, 32, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at -10% 80%,
+      rgba(26, 35, 64, 0.07) 0%,
+      transparent 60%
+    ),
+    var(--ivory);
+  padding: 2.5rem 1.5rem 4rem;
+  overflow-x: hidden;
+  color: var(--text-dark);
+}
+
+/* ── Card ─────────────────────────────────── */
+.attendance-table2 {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  max-width: 40%;
+  margin: auto;
+  padding: 2rem 0 2.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  margin-top: 5%;
+}
+.attendance-table2 table {
+  width: 100%;
+}
+/* amber top accent bar */
+.attendance-table2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* corner glow */
+.attendance-table2::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Table scroll container ───────────────── */
+.attendance-table2 > table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  padding: 0 2.5rem;
+}
+
+/* ── Table head ───────────────────────────── */
+.attendance-table2 > table thead tr {
+  background: var(--ivory);
+}
+
+.attendance-table2 > table thead th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.attendance-table2 > table thead th:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.attendance-table2 > table thead th:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ── Table body rows ──────────────────────── */
+.attendance-table2 > table tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background var(--transition);
+}
+
+.attendance-table2 > table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.attendance-table2 > table tbody tr:hover {
+  background: rgba(247, 244, 238, 0.6);
+}
+
+/* ── Table cells ──────────────────────────── */
+.attendance-table2 > table tbody td {
+  padding: 0.9rem 1rem;
+  color: var(--text-mid);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* student name */
+.attendance-table2 > table tbody td:first-child {
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* timestamp */
+.attendance-table2 > table tbody td:last-child {
+  color: var(--text-light);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+}
+
+/* empty state */
+.attendance-table2 > table tbody td[colSpan="3"],
+.attendance-table2 > table tbody td[colspan="3"] {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 2rem 1rem;
+  font-style: italic;
+}
+
+/* ── Attendance status indicators ─────────── */
+.show-present,
+.show-absent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* dot */
+.show-present::before,
+.show-absent::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.show-present {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.show-present::before {
+  background: var(--green);
+}
+
+.show-present::after {
+  content: "Present";
+}
+
+.show-absent {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.show-absent::before {
+  background: var(--red);
+}
+
+.show-absent::after {
+  content: "Absent";
+}
+
+/* ── Responsive: tablet ───────────────────── */
+@media (max-width: 768px) {
+  .attendance-Sheet {
+    padding: 1.5rem 1rem 3rem;
+  }
+  .attendance-table2 {
+    width: 95%;
+  }
+  .attendance-table2 > table {
+    padding: 0 1.25rem;
+  }
+}
+
+/* ── Responsive: mobile ───────────────────── */
+@media (max-width: 480px) {
+  .attendance-Sheet {
+    padding: 1rem 0.75rem 3rem;
+  }
+
+  .attendance-table2 {
+    padding: 1.5rem 0 1.75rem;
+    max-width: 98%;
+    margin-top: 15%;
+  }
+
+  .attendance-table2 > table {
+    padding: 0 1rem;
+  }
+
+  .attendance-table2 > table thead th,
+  .attendance-table2 > table tbody td {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.82rem;
+  }
+}

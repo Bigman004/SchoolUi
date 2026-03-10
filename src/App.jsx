@@ -9,6 +9,9 @@ import Student from "./Components/Student";
 import EditProfile from "./Components/EditProfile";
 import ResultList from "./Components/ResultList";
 import ChangePassword from "./Components/ChangePassword";
+import Attendance from "./Components/Attendance";
+import ReviewAttendancePage from "./Components/ReviewAttendancePage";
+import ReviewAttendanceDate from "./Components/ReviewAttendanceDate";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -32,6 +35,12 @@ function App() {
           <Route path="/student" element={<Student />} />
           <Route path="/edit/:id" element={<EditProfile />} />
           <Route path="/result_page" element={<ResultList />} />
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/review_attendance" element={<ReviewAttendancePage />} />
+          <Route
+            path="/review_attendance_date/:date"
+            element={<ReviewAttendanceDate />}
+          />
           <Route path="*" element={<Login />} />
           <Route
             path="/change-password/:teacherRegNo"

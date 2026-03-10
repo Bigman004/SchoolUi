@@ -3,7 +3,7 @@ import email_icon from "../assets/images/email.png";
 import password_icon from "../assets/images/password.png";
 import user_icon from "../assets/images/teacher-logo.png";
 import "./Login.css";
-import { postLoginDetails, postLoginDetails2 } from "../Service/Service";
+import { postLoginDetails2 } from "../Service/Service";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [registrationNumber, setRegistrationNumber] = useState("");

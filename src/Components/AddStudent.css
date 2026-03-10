@@ -1,15 +1,62 @@
-/* === General Reset === */
-body {
-  font-family: "Poppins", Arial, sans-serif;
-  background-color: #f4f6fb;
+/* ============================================
+   AddStudent.css
+   Targets the exact Tailwind class names used
+   in the original AddStudent JSX.
+   Theme: matches TeacherPage palette
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #333;
 }
 
-/* === Main Container === */
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --radius-sm: 6px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--ivory);
+  min-height: 100vh;
+}
+
+/* page background */
+body {
+  background:
+    radial-gradient(
+      ellipse 70% 40% at 80% -10%,
+      rgba(232, 160, 32, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at -10% 80%,
+      rgba(26, 35, 64, 0.07) 0%,
+      transparent 60%
+    ),
+    var(--ivory);
+}
+
+/* ── Outer card: max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl ── */
 .max-w-md {
-  max-width: 450px;
+  max-width: 480px;
 }
 
 .mx-auto {
@@ -18,117 +65,192 @@ body {
 }
 
 .mt-10 {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 .p-6 {
-  padding: 1.5rem;
+  padding: 2.5rem;
 }
 
 .bg-white {
-  background-color: #ffffff;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* amber top accent bar */
+.bg-white::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* corner glow */
+.bg-white::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
 .shadow-lg {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .rounded-2xl {
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Heading: text-2xl font-semibold mb-4 text-center ── */
+.text-2xl {
+  font-family: "Fraunces", serif;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+.font-semibold {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.mb-4 {
+  margin-bottom: 1.25rem;
 }
 
 .text-center {
   text-align: center;
 }
 
-/* === Heading === */
-.text-2xl {
-  font-size: 1.8rem;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.text-2xl.font-semibold.mb-4.text-center {
-  color: #1e3a8a;
-  letter-spacing: 0.5px;
-}
-
-/* === Form Styles === */
+/* ── Form: space-y-3 ── */
 .space-y-3 {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
+/* ── Inputs & textarea: w-full border p-2 rounded ── */
 .w-full {
   width: 100%;
 }
 
 .border {
-  border: 1px solid #d1d5db;
+  border: 1.5px solid var(--ivory-dark);
+  background: var(--ivory);
+  color: var(--text-dark);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.92rem;
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.border::placeholder {
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+.border:focus {
+  border-color: var(--amber);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(232, 160, 32, 0.14);
 }
 
 .p-2 {
-  padding: 0.5rem;
+  padding: 0.7rem 0.9rem;
 }
 
 .rounded {
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
-.border:focus,
-textarea:focus,
-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-  outline: none;
+textarea.w-full {
+  min-height: 90px;
+  resize: none;
 }
 
-/* === Button Styles === */
+/* ── Button: w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition ── */
 .bg-blue-600 {
-  background-color: #2563eb;
+  background: var(--navy);
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
-.bg-blue-600:hover {
-  background-color: #1d4ed8;
+.bg-blue-600:hover:not(:disabled) {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 35, 64, 0.18);
 }
 
-.text-white {
-  color: #fff;
+.bg-blue-600:active:not(:disabled) {
+  transform: translateY(0);
 }
 
-.transition {
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.03);
-}
-
-button:disabled {
-  background-color: #9ca3af;
+.bg-blue-600:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* === Status Message === */
-.text-center.mt-3.font-medium {
-  margin-top: 0.75rem;
+.text-white {
+  color: var(--white);
+}
+
+.transition {
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+/* ── Status message: text-center mt-3 font-medium ── */
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.font-medium {
   font-weight: 500;
-  font-size: 0.95rem;
-  color: #111827;
+  font-size: 0.88rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  /* default: neutral, colour set by content below */
+  background: rgba(26, 35, 64, 0.05);
+  color: var(--text-mid);
 }
 
-/* Success/Error Highlight (optional enhancement) */
-.text-center.mt-3.font-medium:contains("✅") {
-  color: #10b981;
-}
+/* ── Responsive: mobile ───────────────────── */
+@media (max-width: 520px) {
+  .mt-10 {
+    margin-top: 1.5rem;
+  }
 
-.text-center.mt-3.font-medium:contains("❌") {
-  color: #ef4444;
+  .p-6 {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .text-2xl {
+    font-size: 1.35rem;
+  }
 }

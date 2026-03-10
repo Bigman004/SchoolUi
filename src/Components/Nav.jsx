@@ -6,59 +6,75 @@ import { getTeacher } from "../Service/Service";
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [teacher, setTeacher] = useState({});
+
   useEffect(() => {
     async function getTeacherDetails() {
       const response = await getTeacher();
       setTeacher(response);
-      return response;
     }
     getTeacherDetails();
   }, []);
-  console.log(teacher);
 
   return (
     <nav className="main-navbar">
-      <div className="nav-left">
-        <h2 className="nav-logo">Teacher Dashboard</h2>
-      </div>
+      {/* Logo circle */}
+      <div className="nav-logo">🎓</div>
 
       {/* Nav links */}
-      <input type="checkbox" id="sidebar-active" />
-      <div className="nav-links">
-        <label htmlFor="sidebar-active" className="closed-sidebar-button">
+      <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <Link to="/teacher_page" onClick={() => setMenuOpen(false)}>
+          Dashboard
+        </Link>
+        <Link to="/student" onClick={() => setMenuOpen(false)}>
+          Students
+        </Link>
+        <Link to="/add_student" onClick={() => setMenuOpen(false)}>
+          Add Student
+        </Link>
+        <Link to="/result_page" onClick={() => setMenuOpen(false)}>
+          Results
+        </Link>
+        <Link to="/attendance" onClick={() => setMenuOpen(false)}>
+          Attendance
+        </Link>
+        <Link
+          to={`/change-password/${teacher?.user?.registrationNumber}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          Password
+        </Link>
+      </div>
+
+      {/* Welcome pill */}
+      <div className="welcome-text">Welcome, Teacher</div>
+
+      {/* Hamburger */}
+      <button
+        className="open-sidebar-button"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        {menuOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            height="24px"
+            height="22px"
             viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
+            width="22px"
+            fill="#1a1a1a"
           >
             <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
           </svg>
-        </label>
-
-        <Link to="/teacher_page">🏠 Dashboard</Link>
-
-        <Link to="/student">👨‍🎓 Students</Link>
-
-        <Link to="/add_student">➕ Add Student</Link>
-        <Link to="/result_page">📊 Results</Link>
-        <Link to={`/change-password/${teacher?.user?.registrationNumber}`}>
-          🔐 change password
-        </Link>
-      </div>
-      <div className="welcome-text">Welcome Teacher</div>
-      <label htmlFor="sidebar-active" className="open-sidebar-button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#ffff"
-        >
-          <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-        </svg>
-      </label>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="22px"
+            viewBox="0 -960 960 960"
+            width="22px"
+            fill="#1a1a1a"
+          >
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+          </svg>
+        )}
+      </button>
     </nav>
   );
 };

@@ -1,125 +1,357 @@
-/* === CONTAINER === */
-.teacher-container {
-  margin-top: 100px; /* keeps space for fixed navbar */
-  padding: 30px 50px;
-  font-family: "Poppins", sans-serif;
-  background-color: #f8fafc;
+/* ============================================
+   TeacherPage.css — Clean Academic Dashboard
+   Font: Fraunces (display) + DM Sans (body)
+   Theme: Warm ivory & deep navy with amber accents
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --shadow-hover: 0 8px 32px rgba(26, 35, 64, 0.16);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--ivory);
+  color: var(--text-dark);
   min-height: 100vh;
 }
 
-/* === TEACHER INFO CARD === */
-.teacher-info {
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 15px;
-  padding: 20px 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  margin-bottom: 40px;
-  transition: all 0.3s ease;
+/* ── Page Wrapper ─────────────────────────── */
+.teacher-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse 70% 40% at 80% -10%,
+      rgba(232, 160, 32, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at -10% 80%,
+      rgba(26, 35, 64, 0.07) 0%,
+      transparent 60%
+    ),
+    var(--ivory);
+  padding: 2.5rem 1.5rem 4rem;
 }
 
+/* ── Main Container ───────────────────────── */
+.teacher-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Teacher Info Card ────────────────────── */
+.teacher-info {
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative accent strip */
+.teacher-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+/* subtle background texture */
+.teacher-info::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Teacher Avatar ───────────────────────── */
 .teacher-image {
   width: 90px;
   height: 90px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 25px;
-  background-color: #e2e8f0;
-  padding: 10px;
+  border: 3px solid var(--amber);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 5px rgba(232, 160, 32, 0.18);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.teacher-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 7px rgba(232, 160, 32, 0.22);
+}
+
+/* ── Teacher Info Text ────────────────────── */
+.teacher-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1;
 }
 
 .teacher-info-content .text {
-  font-size: 1rem;
-  font-weight: 500;
-  margin: 5px 0;
-  color: #1e293b;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
-/* === STUDENT LIST === */
+.teacher-info-content .text:first-child {
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15rem;
+}
+
+/* ── Student List Card ────────────────────── */
 .student-list {
-  background: #ffffff;
-  border-radius: 15px;
-  padding: 25px 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  overflow-x: auto;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem 2.5rem;
+  box-shadow: var(--shadow-card);
 }
 
 .student-list h2 {
+  font-family: "Fraunces", serif;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #1d3557;
-  margin-bottom: 20px;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-/* === TABLE STYLING === */
-.student-list table {
+.student-list h2::after {
+  content: "";
+  display: inline-block;
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ivory-dark), transparent);
+  border-radius: 2px;
+}
+
+/* ── Table scroll container ───────────────── */
+.student-list {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-list > table {
+  display: table;
+  width: 100%;
+  min-width: 560px;
+}
+
+/* ── Table ────────────────────────────────── */
+table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead tr {
+  background: var(--ivory);
+  border-radius: var(--radius-sm);
+}
+
+thead th {
+  padding: 0.85rem 1rem;
   text-align: left;
-  font-size: 0.95rem;
-}
-
-.student-list thead {
-  background-color: #1d4ed8;
-  color: #fff;
-}
-
-.student-list th,
-.student-list td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.student-list th {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  white-space: nowrap;
 }
 
-.student-list tbody tr:hover {
-  background-color: #f1f5f9;
+thead th:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+thead th:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-/* === LINKS === */
-.student-list a {
-  text-decoration: none;
-  color: #2563eb;
+tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background var(--transition);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: rgba(247, 244, 238, 0.6);
+}
+
+tbody td {
+  padding: 0.9rem 1rem;
+  color: var(--text-mid);
+  font-weight: 400;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Student name column — slightly bolder */
+tbody td:nth-child(2) {
+  color: var(--navy);
   font-weight: 500;
-  transition: color 0.2s ease;
 }
 
-.student-list a:hover {
-  color: #1e40af;
-  text-decoration: underline;
+/* Student ID — monospaced pill */
+tbody td:nth-child(1) {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 900px) {
-  .teacher-container {
-    padding: 20px;
+/* ── Link Buttons ─────────────────────────── */
+tbody td a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+/* Edit profile link — amber style */
+tbody td:nth-child(5) a {
+  color: var(--amber);
+  background: rgba(232, 160, 32, 0.1);
+}
+
+tbody td:nth-child(5) a:hover {
+  background: rgba(232, 160, 32, 0.22);
+  transform: translateY(-1px);
+}
+
+/* Upload result link — navy style */
+tbody td:nth-child(6) a {
+  color: var(--navy-mid);
+  background: rgba(26, 35, 64, 0.07);
+}
+
+tbody td:nth-child(6) a:hover {
+  background: rgba(26, 35, 64, 0.14);
+  transform: translateY(-1px);
+}
+
+/* ── Responsive: Tablet ───────────────────── */
+@media (max-width: 768px) {
+  .teacher-page {
+    padding: 1.5rem 1rem 3rem;
   }
 
   .teacher-info {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.25rem;
   }
 
   .teacher-image {
-    margin-bottom: 10px;
+    width: 70px;
+    height: 70px;
   }
 
-  .student-list table {
-    font-size: 0.9rem;
+  .teacher-info-content .text:first-child {
+    font-size: 1.2rem;
+  }
+
+  .student-list {
+    padding: 1.5rem 1rem 2rem;
   }
 }
 
-@media (max-width: 600px) {
-  .student-list table th,
-  .student-list table td {
-    padding: 10px 8px;
+/* ── Responsive: Mobile ───────────────────── */
+@media (max-width: 480px) {
+  .teacher-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-info::before {
+    width: 100%;
+    height: 5px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .teacher-image {
+    width: 64px;
+    height: 64px;
+  }
+
+  .teacher-info-content .text:first-child {
+    font-size: 1.1rem;
   }
 
   .student-list h2 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+
+  thead th,
+  tbody td {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.82rem;
   }
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./TeacherPage.css";
 import teacherLogo from "../assets/images/teacher-logo.png";
 import Nav from "./Nav";
-import { listStudent, listStudent2 } from "../Service/Service";
+import { listStudent2 } from "../Service/Service";
 export const TeacherPage = () => {
   const [teacher, setTeacher] = useState({});
   const [studentList, setStudentList] = useState([]);

@@ -1,0 +1,330 @@
+/* ============================================
+   Attendance.css
+   Font: Fraunces (display) + DM Sans (body)
+   Theme: matches TeacherPage palette
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --green: #2d7a4f;
+  --green-soft: rgba(45, 122, 79, 0.1);
+  --red: #b33a3a;
+  --red-soft: rgba(179, 58, 58, 0.09);
+  --radius-sm: 6px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(
+      ellipse 70% 40% at 80% -10%,
+      rgba(232, 160, 32, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at -10% 80%,
+      rgba(26, 35, 64, 0.07) 0%,
+      transparent 60%
+    ),
+    var(--ivory);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* ── Page wrapper ─────────────────────────── */
+.attendance-table {
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: auto;
+  margin-top: 5%;
+}
+
+/* ── Card ─────────────────────────────────── */
+.attendance-wrapper {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: 860px;
+  padding: 2rem 0 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* amber top accent bar */
+.attendance-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* corner glow */
+.attendance-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Header row: title + review button ───── */
+.attendance-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.attendance-action h2 {
+  font-family: "Fraunces", serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+/* Review Attendance button */
+.attendance-action button {
+  background: var(--navy);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+  flex-shrink: 0;
+}
+
+.attendance-action button:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 35, 64, 0.18);
+}
+
+.attendance-action button:active {
+  transform: translateY(0);
+}
+
+.attendance-action button a {
+  display: block;
+  padding: 0.55rem 1.1rem;
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ── Table scroll container ───────────────── */
+.attendance-wrapper > table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  padding: 0 2.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ── Table head ───────────────────────────── */
+thead tr {
+  background: var(--ivory);
+}
+
+thead th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+thead th:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+thead th:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ── Table body ───────────────────────────── */
+tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background var(--transition);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: rgba(247, 244, 238, 0.6);
+}
+
+tbody td {
+  padding: 0.9rem 1rem;
+  color: var(--text-mid);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* student name — bolder */
+tbody td:first-child {
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* ── Mark Present / Mark Absent buttons ───── */
+tbody td:last-child {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+tbody td button {
+  display: inline-flex;
+  align-items: center;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+  white-space: nowrap;
+}
+
+tbody td button:hover {
+  transform: translateY(-1px);
+}
+
+tbody td button:active {
+  transform: translateY(0);
+}
+
+/* Mark Present — green */
+tbody td button:first-child {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+tbody td button:first-child:hover {
+  background: rgba(45, 122, 79, 0.18);
+}
+
+/* Mark Absent — red */
+tbody td button:last-child {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+tbody td button:last-child:hover {
+  background: rgba(179, 58, 58, 0.16);
+}
+
+/* ── Responsive: tablet ───────────────────── */
+@media (max-width: 768px) {
+  .attendance-table {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .attendance-action {
+    padding: 0 1.25rem;
+  }
+
+  .attendance-wrapper > table {
+    padding: 0 1.25rem;
+  }
+}
+
+/* ── Responsive: mobile ───────────────────── */
+@media (max-width: 480px) {
+  .attendance-table {
+    padding: 1rem 0.75rem 3rem;
+    margin-top: 10%;
+  }
+
+  .attendance-wrapper {
+    padding: 1.5rem 0 1.75rem;
+  }
+
+  .attendance-action {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 1rem;
+  }
+
+  .attendance-action h2 {
+    font-size: 1.15rem;
+  }
+
+  .attendance-wrapper > table {
+    padding: 0 1rem;
+  }
+
+  thead th,
+  tbody td {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  tbody td:last-child {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+}

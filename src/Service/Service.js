@@ -2,7 +2,7 @@ import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 
 const Service = axios.create({
-  baseURL: "https://java-application-latest-ywhd.onrender.com",
+  baseURL: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -125,34 +125,17 @@ export async function addStudent(student) {
   });
   return response.data;
 }
-export const listStudent = () => {
-  return axios.get(REST_API_BASE_URL + "/teacher/", {
+export async function markStudentById(id, attend) {
+  const response = await Service.post(`teacher/mark/${id}`, attend, {
     withCredentials: true,
   });
-};
-
-export const postLoginDetails = (regNo, password) => {
-  return axios.post(
-    REST_API_BASE_URL + "/login",
-    {
-      id: 1,
-      registrationNumber: regNo,
-      password: password,
-    },
-    { withCredentials: true },
-  );
-};
-
-export const fetchTeacher = () => {
-  return axios.get(REST_API_BASE_URL + "/api/teacher", {
+  return response.data;
+}
+export async function getAttendanceDate(date) {
+  const response = await Service.post("teacher/attendance/date", date, {
     withCredentials: true,
   });
-};
-
-export const submitStudent = () => {
-  return axios.post("http://localhost:8080/api/students", student, {
-    withCredentials: true,
-  });
-};
+  return response;
+}
 
 export default Service;
