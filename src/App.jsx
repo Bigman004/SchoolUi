@@ -30,7 +30,7 @@ function App() {
         <section></section>
         <Routes>
           <Route path="/teacher_page" element={<TeacherPage />} />
-          <Route path="/result/:id" element={<Result />} />
+          <Route path="/result/:info" element={<Result />} />
           <Route path="/add_student" element={<AddStudent />} />
           <Route path="/student" element={<Student />} />
           <Route path="/edit/:id" element={<EditProfile />} />

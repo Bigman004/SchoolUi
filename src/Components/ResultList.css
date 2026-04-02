@@ -1,127 +1,272 @@
 :root {
-  --primary: #0b5fff;
-  --secondary: #0bc9a7;
-  --accent: #ffd166;
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --border: rgba(11, 95, 255, 0.1);
-  --shadow: 0 6px 18px rgba(9, 30, 66, 0.06);
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --green: #2d7a4f;
+  --green-soft: rgba(45, 122, 79, 0.12);
+  --red: #b33a3a;
+  --red-soft: rgba(179, 58, 58, 0.1);
+  --radius-sm: 6px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== Result Page ===== */
+/* ── Page ── */
 .result-page {
-  background: var(--bg);
   min-height: 100vh;
-  padding: 30px 20px;
+  background: var(--ivory);
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.25rem;
 }
 
-/* ===== Term Table Container ===== */
+/* ── Term card (outer accordion) ── */
 .termtable {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
-/* ===== Collapsible Summary (Term Header) ===== */
-.termtable summary {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--primary);
-  padding: 16px 20px;
-  cursor: pointer;
-  background: #f0f6ff;
-  border-left: 4px solid var(--secondary);
-  user-select: none;
-  list-style: none;
+.termtable > details > summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition);
 }
 
-.termtable summary::after {
-  content: "▼";
-  font-size: 14px;
-  color: var(--secondary);
-  transition: transform 0.3s ease;
-}
-
-.termtable[open] summary::after {
-  transform: rotate(-180deg);
-}
-
-/* Remove default disclosure triangle */
-.termtable summary::-webkit-details-marker {
+.termtable > details > summary::-webkit-details-marker {
   display: none;
 }
 
-/* ===== Table Styling ===== */
-.termtable table {
+.termtable > details > summary::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--amber);
+  border-bottom: 2px solid var(--amber);
+  transform: rotate(45deg);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.termtable > details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.termtable > details > summary:hover {
+  background: var(--navy-mid);
+}
+
+/* ── Type sections (inner accordions: Test / Exam) ── */
+.type-section {
+  border-top: 1px solid var(--ivory-dark);
+}
+
+.type-section:first-of-type {
+  border-top: none;
+}
+
+.type-section > details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--ivory);
+  color: var(--text-mid);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  border-left: 3px solid var(--amber);
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+.type-section > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.type-section > details > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-light);
+  border-bottom: 2px solid var(--text-light);
+  transform: rotate(45deg);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.type-section > details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.type-section > details > summary:hover {
+  background: var(--ivory-dark);
+  color: var(--text-dark);
+}
+
+/* ── Table wrapper ── */
+.type-section > details > div,
+.type-section > details[open] > table {
+  overflow-x: auto;
+}
+
+.type-section table {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  color: var(--text-dark);
 }
 
-.termtable thead {
-  background-color: var(--primary);
-  color: #fff;
+/* ── Table head ── */
+.type-section thead tr {
+  background: var(--ivory-dark);
+  border-bottom: 2px solid var(--amber-soft);
 }
 
-.termtable th {
-  padding: 12px 16px;
+.type-section thead th {
+  padding: 0.75rem 1rem;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+/* ── Table body ── */
+.type-section tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background var(--transition);
+}
+
+.type-section tbody tr:last-child {
+  border-bottom: none;
+}
+
+.type-section tbody tr:hover {
+  background: var(--green-soft);
+}
+
+.type-section tbody td {
+  padding: 0.75rem 1rem;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+/* Student ID — subtle pill */
+.type-section tbody td:first-child {
+  color: var(--text-light);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Name column — slightly bolder */
+.type-section tbody td:nth-child(2) {
   font-weight: 600;
+  color: var(--navy);
 }
 
-.termtable td {
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  color: var(--text);
+/* Score cells — centered */
+.type-section tbody td:nth-child(n + 3) {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
-.termtable tbody tr:hover {
-  background-color: rgba(11, 201, 167, 0.08);
-  transition: background 0.3s ease;
+/* Zero score — muted */
+.type-section tbody td:nth-child(n + 3):where(:not(:empty)) {
+  color: var(--text-light);
 }
 
-@media (max-width: 900px) {
-  /* Make the table scrollable instead of collapsing it */
-  .termtable {
-    overflow-x: auto;
-  }
-
-  .termtable table {
-    min-width: 700px; /* ensure full table visible with scroll */
-    border-collapse: collapse;
-  }
-
-  /* Optional: add a soft shadow for the scrollable area */
-  .termtable::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .termtable::-webkit-scrollbar-thumb {
-    background: var(--secondary);
-    border-radius: 4px;
-  }
-
-  /* Tweak text for small screens */
-  .termtable th,
-  .termtable td {
-    font-size: 13px;
-    padding: 8px 10px;
-    white-space: nowrap;
-  }
-
-  /* Let user scroll horizontally if needed */
+/* ── Responsive: stack table as cards on small screens ── */
+@media (max-width: 640px) {
   .result-page {
-    overflow-x: hidden;
+    padding: 1rem 0.75rem;
+  }
+
+  .termtable > details > summary {
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .type-section > details > summary {
+    padding: 0.625rem 1rem;
+  }
+
+  .type-section table {
+    display: block;
+  }
+
+  .type-section thead {
+    display: none;
+  }
+
+  .type-section tbody,
+  .type-section tbody tr,
+  .type-section tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  .type-section tbody tr {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--ivory-dark);
+  }
+
+  .type-section tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    font-size: 0.8125rem;
+    white-space: normal;
+  }
+
+  .type-section tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-mid);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+  }
+
+  .type-section tbody td:first-child,
+  .type-section tbody td:nth-child(2),
+  .type-section tbody td:nth-child(n + 3) {
+    text-align: right;
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .type-section tbody td:nth-child(2) {
+    font-weight: 600;
+    color: var(--navy);
   }
 }
