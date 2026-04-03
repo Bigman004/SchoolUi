@@ -296,6 +296,41 @@ tbody td:nth-child(6) a:hover {
   background: rgba(26, 35, 64, 0.14);
   transform: translateY(-1px);
 }
+.term-action {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+}
+.term-action div {
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+button:hover .term-action {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+}
+.first-term,
+.second-term,
+.third-term {
+  background-color: var(--amber);
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+.first-term:hover,
+.second-term:hover,
+.third-term:hover {
+  background-color: #1a2340;
+}
 
 /* ── Responsive: Tablet ───────────────────── */
 @media (max-width: 768px) {

@@ -73,7 +73,7 @@ export const postLoginDetails2 = async (regNo, password) => {
   return response;
 };
 export const getStudentResult = async (info) => {
-  const response = await Service.get("/result/"+info, {
+  const response = await Service.get("/result/" + info, {
     withCredentials: true,
   });
   return response.data;
@@ -84,8 +84,8 @@ export const listResult = async () => {
   });
   return response.data;
 };
-export async function postResultbyterm(id, term, result) {
-  const response = await Service.post("result/" + id + "/" + term, result, {
+export async function postResultbyterm(info, result) {
+  const response = await Service.post("result/" + info, result, {
     withCredentials: true,
   });
   return response;
@@ -136,6 +136,12 @@ export async function getAttendanceDate(date) {
     withCredentials: true,
   });
   return response;
+}
+export async function printResult(info) {
+  const response = await Service.get("result/" + info, {
+    withCredentials: true,
+  });
+  return response.data;
 }
 
 export default Service;

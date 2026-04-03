@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "./TeacherPage.css";
 import teacherLogo from "../assets/images/teacher-logo.png";
 import Nav from "./Nav";
-import { listStudent2 } from "../Service/Service";
+import { listStudent2, printResult } from "../Service/Service";
+import { generateResult } from "../Service/PdfTemplate";
 export const TeacherPage = () => {
   const [teacher, setTeacher] = useState({});
   const [studentList, setStudentList] = useState([]);
@@ -17,6 +18,12 @@ export const TeacherPage = () => {
     }
     fetchData();
   }, []);
+
+  const handleClick = async (id, term) => {
+    const response = await printResult(id + "/" + term);
+    console.log(response);
+    generateResult(response);
+  };
   return (
     <>
       <Nav />
@@ -60,7 +67,33 @@ export const TeacherPage = () => {
                       <Link to={`/edit/${student.id}`}>✏️ Edit profile</Link>
                     </td>
                     <td>
-                      <Link to={`/result/${student.id}`}>result</Link>
+                      <button
+                        onClick={() => {
+                          handleClick(student.id, "1st term");
+                        }}
+                      >
+                        result
+                        <div className="term-action">
+                          <div
+                            className="first-term"
+                            onClick={() => handleClick(student.id, "1st term")}
+                          >
+                            1st term
+                          </div>
+                          <div
+                            className="second-term"
+                            onClick={() => handleClick(student.id, "2nd term")}
+                          >
+                            2nd term
+                          </div>
+                          <div
+                            className="third-term"
+                            onClick={() => handleClick(student.id, "3rd term")}
+                          >
+                            3rd term
+                          </div>
+                        </div>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

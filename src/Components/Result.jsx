@@ -43,11 +43,7 @@ const Result = () => {
           className="upload-result-form"
           action={() => {
             async function postResult() {
-              const response = await postResultbyterm(
-                id,
-                "1st term",
-                firstTerm,
-              );
+              const response = await postResultbyterm(info, resultData);
               return response;
             }
             setStatus({ loading: true, message: "" });
@@ -56,7 +52,6 @@ const Result = () => {
               loading: false,
               message: "✅ result upload successfully!",
             });
-            setFirstTerm(initialTermData);
           }}
         >
           <h3></h3>
