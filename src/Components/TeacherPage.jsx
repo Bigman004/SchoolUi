@@ -37,8 +37,8 @@ export const TeacherPage = () => {
             />
             <div className="teacher-info-content">
               <div className="text">name: {teacher.name}</div>
-              <div className="text">email: Teachers email</div>
-              <div className="text">class: class of teacher</div>
+              <div className="text">email: {teacher.email}</div>
+              <div className="text">class: {teacher.teacherClass}</div>
             </div>
           </div>
           <div className="student-list">
@@ -46,6 +46,7 @@ export const TeacherPage = () => {
             <table>
               <thead>
                 <tr>
+                  <th>S/N</th>
                   <th>Student ID</th>
                   <th>Name</th>
                   <th>Parent phone</th>
@@ -57,7 +58,8 @@ export const TeacherPage = () => {
               {studentList.map((student, index) => (
                 <tbody>
                   <tr>
-                    <td>{student.id}</td>
+                    <td>{index + 1}</td>
+                    <td>{student.regNumber}</td>
                     <td>
                       {student.firstName + ""} {student.lastName}
                     </td>

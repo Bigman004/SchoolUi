@@ -8,7 +8,6 @@ const ReviewAttendanceDate = () => {
   const { date } = useParams(); // "12-1-2026"
   const [attendanceList, setAttendanceList] = useState([]);
   const [day, month, year] = date.split("-").map(Number);
-  console.log(day);
   useEffect(() => {
     if (!day || !month || !year) return; // ✅ guard against undefined
 

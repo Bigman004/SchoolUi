@@ -41,7 +41,6 @@ export default function AddStudent() {
       });
     } catch (error) {
       setStatus({ loading: false, message: "❌ Failed to add student." });
-      console.error(error);
     }
   };
 
