@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
-import { getTeacher } from "../Service/Service";
 import { NavLink } from "react-router-dom";
 
-const Nav = () => {
+const OwnerNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [teacher, setTeacher] = useState({});
 
   useEffect(() => {
-    async function getTeacherDetails() {
-      const response = await getTeacher();
-      setTeacher(response);
-    }
-    getTeacherDetails();
+    // async function getTeacherDetails() {
+    //   const response = await getTeacher();
+    //   setTeacher(response);
+    // }
+    // getTeacherDetails();
   }, []);
 
   return (
@@ -22,25 +20,20 @@ const Nav = () => {
 
       {/* Nav links */}
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-        <NavLink to="/teacher_page" onClick={() => setMenuOpen(false)}>
+        <NavLink to="/owner_page" onClick={() => setMenuOpen(false)}>
           Dashboard
         </NavLink>
-        <NavLink to="/student" onClick={() => setMenuOpen(false)}>
-          Students
+        <NavLink to="/add_teacher" onClick={() => setMenuOpen(false)}>
+          Add teacher
         </NavLink>
-        <NavLink to="/add_student" onClick={() => setMenuOpen(false)}>
-          Add Student
+        <NavLink to="/check_payment" onClick={() => setMenuOpen(false)}>
+          check payment
         </NavLink>
-        <NavLink to="/result_page" onClick={() => setMenuOpen(false)}>
-          Results
+        <NavLink to="/create_bill" onClick={() => setMenuOpen(false)}>
+          create bill
         </NavLink>
-        <NavLink to="/attendance" onClick={() => setMenuOpen(false)}>
-          Attendance
-        </NavLink>
-        <NavLink
-          to={`/change-password/${teacher?.user?.registrationNumber}`}
-          onClick={() => setMenuOpen(false)}
-        >
+
+        <NavLink to={`/change-password`} onClick={() => setMenuOpen(false)}>
           Password
         </NavLink>
       </div>
@@ -79,4 +72,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default OwnerNav;

@@ -9,7 +9,6 @@ const ResultList = () => {
   useEffect(() => {
     async function returnList() {
       const response = await listResult();
-      console.log(response);
       setList(response);
     }
     returnList();

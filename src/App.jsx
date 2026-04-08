@@ -12,6 +12,8 @@ import ChangePassword from "./Components/ChangePassword";
 import Attendance from "./Components/Attendance";
 import ReviewAttendancePage from "./Components/ReviewAttendancePage";
 import ReviewAttendanceDate from "./Components/ReviewAttendanceDate";
+import OwnerPage from "./Components/OwnerPage";
+import AddTeacher from "./Components/AddTeacher";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -26,28 +28,28 @@ function App() {
 
   return (
     <>
-      <Router>
-        <section></section>
-        <Routes>
-          <Route path="/teacher_page" element={<TeacherPage />} />
-          <Route path="/result/:info" element={<Result />} />
-          <Route path="/add_student" element={<AddStudent />} />
-          <Route path="/student" element={<Student />} />
-          <Route path="/edit/:id" element={<EditProfile />} />
-          <Route path="/result_page" element={<ResultList />} />
-          <Route path="/attendance" element={<Attendance />} />
-          <Route path="/review_attendance" element={<ReviewAttendancePage />} />
-          <Route
-            path="/review_attendance_date/:date"
-            element={<ReviewAttendanceDate />}
-          />
-          <Route path="*" element={<Login />} />
-          <Route
-            path="/change-password/:teacherRegNo"
-            element={<ChangePassword />}
-          />
-        </Routes>
-      </Router>
+      <section></section>
+      <Routes>
+        <Route path="/teacher_page" element={<TeacherPage />} />
+        <Route path="/result/:info" element={<Result />} />
+        <Route path="/add_student" element={<AddStudent />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/edit/:id" element={<EditProfile />} />
+        <Route path="/result_page" element={<ResultList />} />
+        <Route path="/attendance" element={<Attendance />} />
+        <Route path="/review_attendance" element={<ReviewAttendancePage />} />
+        <Route path="/owner_page" element={<OwnerPage />} />
+        <Route path="/add_teacher" element={<AddTeacher />} />
+        <Route
+          path="/review_attendance_date/:date"
+          element={<ReviewAttendanceDate />}
+        />
+        <Route path="*" element={<Login />} />
+        <Route
+          path="/change-password/:teacherRegNo"
+          element={<ChangePassword />}
+        />
+      </Routes>
     </>
   );
 }

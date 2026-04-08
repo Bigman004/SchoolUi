@@ -51,8 +51,12 @@ const Login = () => {
                   // {data: ..., status: 200, headers: ..., config: ...}
 
                   if (response.status === 200) {
-                    localStorage.setItem("token", response.data);
-                    navigate("/teacher_page");
+                    localStorage.setItem("token", response.data.token);
+                    if (response.data.message === "TEACHER")
+                      navigate("/teacher_page");
+                    else if (response.data.message === "ADMIN") {
+                      navigate("/owner_page");
+                    }
                   } else {
                     setLoginMessage("invalid credentials");
                   }

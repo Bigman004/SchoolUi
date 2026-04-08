@@ -31,7 +31,6 @@ const EditProfile = () => {
     e.preventDefault();
     setStatus({ loading: true, message: "" });
     const response = await postStudentDetails(student);
-    console.log(response);
     setStatus({ loading: false, message: "✅ uploaded changes successful!" });
   };
   const handleChange = (e) => {
