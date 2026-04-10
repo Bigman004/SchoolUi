@@ -24,9 +24,12 @@ const OwnerPage = () => {
           </div>
           <div className="school-data">
             <span className="school-data-item">
-              Amount of time school open:{" "}
+              Amount of time school open:{" 200"}
             </span>
-            <span className="school-data-item"> Total amount of student: </span>
+            <span className="school-data-item">
+              {" "}
+              Total amount of student: 43{" "}
+            </span>
           </div>
         </div>
         <div className="bottom-page">
