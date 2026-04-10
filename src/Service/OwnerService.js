@@ -51,7 +51,9 @@ OwnerService.interceptors.response.use(
   },
 );
 export async function getOwnerResource() {
-  const response = await OwnerService.get("api/admin_page");
+  const response = await OwnerService.get("api/admin_page", {
+    withCredentials: true,
+  });
   return response.data;
 }
 export async function addTeacher(teacher) {
