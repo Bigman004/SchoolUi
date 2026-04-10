@@ -1,3 +1,145 @@
+/* ── Root palette (already defined, shown for reference) ──
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --text-dark: #1a2340;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
+  --shadow-hover: 0 8px 32px rgba(26, 35, 64, 0.16);
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*/
+
+/* ── Page shell ── */
+.owner-page {
+  min-height: 100vh;
+  background-color: var(--ivory);
+  padding: 2.5rem 2rem;
+  font-family: "Segoe UI", sans-serif;
+  color: var(--text-dark);
+  box-sizing: border-box;
+}
+
+/* ── Dashboard header ── */
+.owner-page::before {
+  content: "Welcome back";
+  display: block;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.owner-page::after {
+  content: "School management overview";
+  display: block;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+/* ── Stat cards row ── */
+.top-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.teacherData,
+.school-data {
+  background-color: var(--white);
+  border: 1px solid var(--ivory-dark);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.teacherData:hover,
+.school-data:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Amber accent bar on left */
+.teacherData::before,
+.school-data::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, var(--amber), var(--amber-soft));
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+/* ── Stat label ── */
+.teacher-data-item,
+.school-data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacher-data-item::before,
+.school-data-item::before {
+  content: attr(data-label);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+}
+
+/* Big number styling — wrap your value in a <strong> inside each span */
+.teacher-data-item strong,
+.school-data-item strong {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+/* Fallback if no <strong> — style the span text itself */
+.teacher-data-item,
+.school-data-item {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+/* Amber icon badge top-right */
+.teacherData::after,
+.school-data::after {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #fff8ec;
+  border: 1.5px solid var(--amber-soft);
+}
 /* ── .value — the big stat number ── */
 .value {
   font-size: clamp(28px, 4vw, 40px);
@@ -111,4 +253,161 @@
 .name-cell {
   display: flex;
   align-items: center;
+}
+/* ── Table card ── */
+.bottom-page {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--ivory-dark);
+  overflow: hidden;
+}
+
+/* Table title bar */
+.bottom-page::before {
+  content: "Teacher Overview";
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 1.25rem 1.75rem 0;
+  letter-spacing: -0.2px;
+}
+
+/* Responsive scroll wrapper — add this div in JSX around <table> */
+.bottom-page {
+  overflow-x: auto;
+}
+
+.bottom-page table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* ── Table head ── */
+.bottom-page thead tr {
+  background-color: var(--navy);
+}
+
+.bottom-page thead th {
+  padding: 1.1rem 1.5rem;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ivory);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+.bottom-page thead th:first-child {
+  border-radius: 0;
+}
+
+/* Amber underline on first header cell */
+.bottom-page thead th:first-child {
+  border-left: 3px solid var(--amber);
+}
+
+/* ── Table body ── */
+.bottom-page tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background-color var(--transition);
+}
+
+.bottom-page tbody tr:last-child {
+  border-bottom: none;
+}
+
+.bottom-page tbody tr:hover {
+  background-color: #fffbf4;
+}
+
+.bottom-page tbody td {
+  padding: 1rem 1.5rem;
+  color: var(--text-dark);
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+/* Teacher name — bold */
+.bottom-page tbody td:first-child {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Email — muted */
+.bottom-page tbody td:nth-child(2) {
+  color: var(--text-mid);
+  font-size: 13px;
+}
+
+/* Class — pill badge */
+.bottom-page tbody td:nth-child(3) {
+  font-size: 12px;
+}
+
+.bottom-page tbody td:nth-child(3)::before {
+  content: attr(data-value);
+}
+
+/* Wrap class values in a span with class="badge" in JSX */
+.badge {
+  display: inline-block;
+  background-color: #fff3d6;
+  color: #a06800;
+  border: 1px solid var(--amber-soft);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Student count — amber number */
+.bottom-page tbody td:nth-child(4) {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--amber);
+  letter-spacing: -0.3px;
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 768px) {
+  .owner-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .top-page {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .teacherData,
+  .school-data {
+    padding: 1.25rem;
+  }
+
+  .bottom-page thead th {
+    font-size: 11px;
+    padding: 0.9rem 1rem;
+  }
+
+  .bottom-page tbody td {
+    padding: 0.85rem 1rem;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-page {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom-page::before {
+    font-size: 14px;
+    padding: 1rem 1rem 0;
+  }
 }
