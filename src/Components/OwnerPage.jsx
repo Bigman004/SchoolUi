@@ -70,7 +70,12 @@ const OwnerPage = () => {
                         {data.teacher.name}
                       </div>
                     </td>
-                    ...
+                    <td>{data.teacher.teacherEmail}</td>
+                    <td>{data.teacher.username}</td>
+                    <td>
+                      <span className="badge">{data.teacher.teacherClass}</span>
+                    </td>
+                    <td>{data.numberOfStudents}</td>
                   </tr>
                 ))}
               </tbody>
