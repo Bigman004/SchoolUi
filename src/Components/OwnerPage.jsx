@@ -54,7 +54,15 @@ const OwnerPage = () => {
           </div>
           <div style={{ overflowX: "auto" }}>
             <table>
-              ...
+              <thead>
+                <tr>
+                  <th>Teacher Name</th>
+                  <th>Teacher Email</th>
+                  <th>username</th>
+                  <th>Teacher Class</th>
+                  <th>No. of student</th>
+                </tr>
+              </thead>
               <tbody>
                 {ownerData?.map((data, index) => (
                   <tr key={index}>
