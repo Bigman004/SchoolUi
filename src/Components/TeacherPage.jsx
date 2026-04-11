@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./TeacherPage.css";
 import Nav from "./Nav";
 import { listStudent2, printResult } from "../Service/Service";
@@ -26,6 +26,7 @@ export const TeacherPage = () => {
   const [teacher, setTeacher] = useState(null);
   const [studentList, setStudentList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -35,6 +36,7 @@ export const TeacherPage = () => {
         setStudentList(response.list ?? []);
       } catch (err) {
         console.error("Failed to load data:", err);
+        navigate("/error_page");
       } finally {
         setLoading(false);
       }
@@ -224,7 +226,7 @@ export const TeacherPage = () => {
 
                       {/* Edit profile */}
                       <td>
-                        <div className="row-actions">
+                        <div className="edit-btn">
                           <Link
                             to={`/edit/${student.id}`}
                             className="row-action-btn"

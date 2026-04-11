@@ -207,6 +207,7 @@
 @media (max-width: 640px) {
   .result-page {
     padding: 1rem 0.75rem;
+    margin-top: 20%;
   }
 
   .termtable > details > summary {

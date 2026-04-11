@@ -14,6 +14,7 @@ import ReviewAttendancePage from "./Components/ReviewAttendancePage";
 import ReviewAttendanceDate from "./Components/ReviewAttendanceDate";
 import OwnerPage from "./Components/OwnerPage";
 import AddTeacher from "./Components/AddTeacher";
+import Error1 from "./Components/Error/Error1";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -49,6 +50,7 @@ function App() {
           path="/change-password/:teacherRegNo"
           element={<ChangePassword />}
         />
+        <Route path="/error_page" element={<Error1 />} />
       </Routes>
     </>
   );
