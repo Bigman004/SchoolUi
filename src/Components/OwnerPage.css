@@ -536,6 +536,7 @@
 @media (max-width: 768px) {
   .owner-page {
     padding: 1.5rem 1.25rem 3rem;
+    margin-top: 100px;
   }
   .page-header {
     flex-direction: column;

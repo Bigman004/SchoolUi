@@ -1,155 +1,435 @@
-/* Base styles */
-* {
+/* ── Tokens (same palette as owner dashboard) ── */
+:root {
+  --navy: #1a2340;
+  --navy-mid: #263050;
+  --ivory: #f7f4ee;
+  --ivory-dark: #ede9e0;
+  --amber: #e8a020;
+  --amber-soft: #f5c36a;
+  --amber-glow: #fff3d6;
+  --amber-pale: #fff8ec;
+  --text-mid: #4a5270;
+  --text-light: #8a91ad;
+  --white: #ffffff;
+  --shadow-card: 0 2px 16px rgba(26, 35, 64, 0.08);
+  --shadow-hover: 0 8px 32px rgba(26, 35, 64, 0.15);
+  --t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.review-attendance-page {
-  padding: 24px 16px;
-  max-width: 900px;
+/* ══════════════════════════════
+   PAGE SHELL
+══════════════════════════════ */
+.teacher-page {
+  min-height: 100vh;
+  background:
+    var(--ivory)
+      radial-gradient(
+        circle at 8% 0%,
+        rgba(232, 160, 32, 0.07) 0%,
+        transparent 45%
+      ),
+    radial-gradient(
+      circle at 92% 100%,
+      rgba(26, 35, 64, 0.04) 0%,
+      transparent 50%
+    );
+  padding: 2.5rem 2.5rem 4rem;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: var(--navy);
+}
+
+/* ══════════════════════════════
+   CONTAINER
+══════════════════════════════ */
+.teacher-container {
+  max-width: 1100px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.review-attendance-page h1 {
-  text-align: center;
-  margin-bottom: 32px;
-  color: #333;
-  font-size: 28px;
-}
-
-.month-container {
-  margin-bottom: 40px;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.month-label {
-  text-align: center;
-  margin-bottom: 12px;
-  color: #4a90e2;
-  font-size: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.month {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-
-.day-header {
+/* ══════════════════════════════
+   TEACHER INFO CARD  —  dark hero
+══════════════════════════════ */
+.teacher-info {
+  background: var(--navy);
+  border-radius: 22px;
+  padding: 2rem 2.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 2rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--t);
+}
+
+.teacher-info:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* Amber left accent — mirrors stat-card */
+.teacher-info::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--amber), var(--amber-soft));
+}
+
+/* Decorative amber glow top-right */
+.teacher-info::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(232, 160, 32, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Avatar ── */
+.teacher-image {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--amber);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 5px rgba(232, 160, 32, 0.18);
+  transition:
+    transform var(--t),
+    box-shadow var(--t);
+  position: relative;
+  z-index: 1;
+}
+
+.teacher-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 8px rgba(232, 160, 32, 0.22);
+}
+
+/* ── Info text block ── */
+.teacher-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+/* Every .text row */
+.teacher-info-content .text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+}
+
+/* First .text = teacher name — larger + brighter */
+.teacher-info-content .text:first-child {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.4px;
+  margin-bottom: 0.1rem;
+}
+
+/* ══════════════════════════════
+   STUDENT LIST CARD
+══════════════════════════════ */
+.student-list {
+  background: var(--white);
+  border: 1px solid var(--ivory-dark);
+  border-radius: 22px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* Card heading */
+.student-list h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.2px;
+  padding: 1.4rem 1.75rem 1.1rem;
+  border-bottom: 1px solid var(--ivory-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Decorative line after heading — matches owner style */
+.student-list h2::after {
+  content: "";
+  display: inline-block;
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ivory-dark), transparent);
+  border-radius: 2px;
+}
+
+/* ── Table scroll ── */
+.student-list > table,
+.student-list > div > table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.student-list {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Table head ── */
+.student-list thead tr {
+  background: var(--navy);
+}
+
+.student-list thead th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(247, 244, 238, 0.72);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+
+.student-list thead th:first-child {
+  border-left: 3px solid var(--amber);
+  color: #f7f4ee;
+}
+
+/* ── Table body ── */
+.student-list tbody tr {
+  border-bottom: 1px solid var(--ivory-dark);
+  transition: background var(--t);
+}
+
+.student-list tbody tr:last-child {
+  border-bottom: none;
+}
+.student-list tbody tr:hover {
+  background: #fffbf4;
+}
+
+.student-list tbody td {
+  padding: 0.95rem 1.25rem;
+  vertical-align: middle;
+  font-size: 14px;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+/* Col 1 — S/N: small muted index */
+.student-list tbody td:nth-child(1) {
   font-size: 12px;
   font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  padding-bottom: 4px;
+  color: var(--text-light);
+  width: 48px;
 }
 
-.action-sec {
-  display: flex;
+/* Col 2 — Reg number: monospace pill */
+.student-list tbody td:nth-child(2) {
+  font-family: "Courier New", "Consolas", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.04em;
+}
+
+/* Col 3 — Student name: bold navy */
+.student-list tbody td:nth-child(3) {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ── Edit profile link ── */
+.student-list tbody td a {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  height: 52px;
-  border: 1px solid #ddd;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--amber);
+  background: var(--amber-pale);
+  border: 1px solid var(--amber-soft);
+  border-radius: 20px;
+  padding: 4px 13px;
+  white-space: nowrap;
+  transition:
+    background var(--t),
+    transform var(--t),
+    border-color var(--t);
+}
+
+.student-list tbody td a:hover {
+  background: var(--amber-glow);
+  border-color: var(--amber);
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════
+   RESULT BUTTON + DROPDOWN
+══════════════════════════════ */
+.student-list tbody td button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(26, 35, 64, 0.06);
+  border: 1px solid var(--ivory-dark);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy-mid);
+  cursor: pointer;
+  position: relative;
+  transition:
+    background var(--t),
+    border-color var(--t);
+  white-space: nowrap;
+}
+
+.student-list tbody td button:hover {
+  background: rgba(26, 35, 64, 0.11);
+  border-color: rgba(26, 35, 64, 0.2);
+}
+
+/* Dropdown panel — hidden by default */
+.term-action {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1px solid var(--ivory-dark);
+  border-radius: 12px;
+  box-shadow: var(--shadow-hover);
+  padding: 6px;
+  z-index: 100;
+  min-width: 120px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Show on button hover */
+.student-list tbody td button:hover .term-action,
+.student-list tbody td button:focus-within .term-action {
+  display: flex;
+}
+
+/* Shared term item */
+.first-term,
+.second-term,
+.third-term {
+  padding: 6px 14px;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  background-color: #f9f9f9;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
   cursor: pointer;
   transition:
-    background-color 0.2s,
-    color 0.2s;
+    background var(--t),
+    color var(--t);
+  text-align: center;
+  color: var(--white);
 }
 
-.action-sec:hover {
-  background-color: #4a90e2;
-  color: white;
-  border-color: #4a90e2;
+.first-term {
+  background: var(--amber);
+}
+.second-term {
+  background: var(--navy-mid);
+}
+.third-term {
+  background: var(--navy);
 }
 
-/* Tablet */
+.first-term:hover {
+  background: #c8880e;
+}
+.second-term:hover {
+  background: #1a2340;
+}
+.third-term:hover {
+  background: #0f1524;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
 @media (max-width: 768px) {
-  .review-attendance-page h1 {
-    font-size: 22px;
-    margin-bottom: 24px;
+  .teacher-page {
+    padding: 1.5rem 1.25rem 3rem;
   }
-
-  .month-label {
-    font-size: 17px;
+  .teacher-info {
+    padding: 1.5rem;
+    gap: 1.25rem;
   }
-
-  .month {
-    gap: 6px;
+  .teacher-image {
+    width: 70px;
+    height: 70px;
   }
-
-  .action-sec {
-    height: 44px;
+  .teacher-info-content .text:first-child {
+    font-size: 1.2rem;
+  }
+  .student-list {
+    padding-bottom: 0;
+  }
+  .student-list thead th {
+    font-size: 10px;
+    padding: 0.85rem 0.9rem;
+  }
+  .student-list tbody td {
+    padding: 0.85rem 0.9rem;
     font-size: 13px;
-    border-radius: 6px;
-  }
-
-  .day-header {
-    font-size: 10px;
   }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
-  .review-attendance-page {
-    padding: 16px 8px;
+  .teacher-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
-
-  .review-attendance-page h1 {
-    font-size: 18px;
-    margin-bottom: 16px;
+  .teacher-info::before {
+    width: 100%;
+    height: 4px;
+    inset: 0 0 auto 0;
   }
-
-  .month-container {
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 24px;
+  .teacher-image {
+    width: 64px;
+    height: 64px;
   }
-
-  .month-label {
+  .teacher-info-content .text:first-child {
+    font-size: 1.1rem;
+  }
+  .student-list h2 {
     font-size: 14px;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-
-  .month {
-    gap: 4px;
-  }
-
-  .action-sec {
-    height: 36px;
-    font-size: 11px;
-    border-radius: 4px;
-  }
-
-  .day-header {
-    font-size: 9px;
-    padding-bottom: 2px;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 320px) {
-  .action-sec {
-    height: 30px;
-    font-size: 10px;
-  }
-
-  .day-header {
-    font-size: 8px;
+    padding: 1.1rem 1.25rem 0.9rem;
   }
 }

@@ -1,392 +1,740 @@
-/* ============================================
-   TeacherPage.css — Clean Academic Dashboard
-   Font: Fraunces (display) + DM Sans (body)
-   Theme: Warm ivory & deep navy with amber accents
-   ============================================ */
+/* ============================================================
+   TeacherPage.css
+   Scoping strategy: one-level prefix (.teacher-page .class)
+   Prevents bleed into OwnerPage without deep chain selectors.
+   Fonts  : Playfair Display + Instrument Sans
+   Palette: Ink · warm parchment · burnished gold
+   ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Instrument+Sans:wght@300;400;500;600&display=swap");
 
-*,
-*::before,
-*::after {
+/* ── Reset — scoped to this component only ── */
+.teacher-page *,
+.teacher-page *::before,
+.teacher-page *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --navy: #1a2340;
-  --navy-mid: #263050;
-  --ivory: #f7f4ee;
-  --ivory-dark: #ede9e0;
-  --amber: #e8a020;
-  --amber-soft: #f5c36a;
-  --text-dark: #1a2340;
-  --text-mid: #4a5270;
-  --text-light: #8a91ad;
-  --white: #ffffff;
-  --radius-sm: 6px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --shadow-card: 0 4px 24px rgba(26, 35, 64, 0.1);
-  --shadow-hover: 0 8px 32px rgba(26, 35, 64, 0.16);
-  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-body {
-  font-family: "DM Sans", sans-serif;
-  background-color: var(--ivory);
-  color: var(--text-dark);
-  min-height: 100vh;
-}
-
-/* ── Page Wrapper ─────────────────────────── */
+/* ── Tokens — on .teacher-page so they don't leak to :root ── */
 .teacher-page {
+  --ink: #16181f;
+  --ink-mid: #23273a;
+  --parchment: #f5f0e8;
+  --parchment-mid: #ede5d8;
+  --parchment-dk: #d9cfc0;
+  --gold: #c8922a;
+  --gold-bright: #e5ab42;
+  --gold-pale: rgba(200, 146, 42, 0.11);
+  --gold-glow: rgba(200, 146, 42, 0.22);
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --green: #4caf82;
+
+  --text-heading: #16181f;
+  --text-body: #3a3f55;
+  --text-muted: #7a8099;
+  --text-ghost: #a8adc0;
+  --text-dim: rgba(245, 240, 232, 0.52);
+
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  --shadow-card:
+    0 1px 3px rgba(22, 24, 31, 0.07), 0 4px 20px rgba(22, 24, 31, 0.09);
+  --shadow-lift:
+    0 8px 32px rgba(22, 24, 31, 0.18), 0 2px 8px rgba(22, 24, 31, 0.1);
+  --shadow-dropdown:
+    0 4px 6px rgba(22, 24, 31, 0.08), 0 14px 40px rgba(22, 24, 31, 0.22);
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --dur: 0.2s;
+}
+
+/* ══════════════════════════════════════════
+   PAGE SHELL
+   ══════════════════════════════════════════ */
+.teacher-page {
+  font-family: "Instrument Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  padding: 2.5rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
   background:
     radial-gradient(
-      ellipse 70% 40% at 80% -10%,
-      rgba(232, 160, 32, 0.1) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 50% 50% at -10% 80%,
-      rgba(26, 35, 64, 0.07) 0%,
+      ellipse 60% 50% at 100% 0%,
+      rgba(200, 146, 42, 0.13) 0%,
       transparent 60%
     ),
-    var(--ivory);
-  padding: 2.5rem 1.5rem 4rem;
+    radial-gradient(
+      ellipse 50% 40% at 0% 100%,
+      rgba(22, 24, 31, 0.07) 0%,
+      transparent 55%
+    ),
+    var(--parchment);
 }
 
-/* ── Main Container ───────────────────────── */
-.teacher-container {
-  max-width: 1100px;
-  margin: 0 auto;
+/* ══════════════════════════════════════════
+   PAGE HEADER
+   ══════════════════════════════════════════ */
+.teacher-page .page-header {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: tp-fadeUp 0.45s var(--ease-out) both;
 }
 
-/* ── Teacher Info Card ────────────────────── */
-.teacher-info {
-  background: var(--navy);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2.5rem;
+.teacher-page .page-header-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.teacher-page .page-header-text p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.teacher-page .page-header-meta {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  box-shadow: var(--shadow-card);
-  position: relative;
-  overflow: hidden;
-}
-
-/* decorative accent strip */
-.teacher-info::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--amber), var(--amber-soft));
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-}
-
-/* subtle background texture */
-.teacher-info::after {
-  content: "";
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(
-    circle,
-    rgba(232, 160, 32, 0.12) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
-}
-
-/* ── Teacher Avatar ───────────────────────── */
-.teacher-image {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--amber);
-  flex-shrink: 0;
-  box-shadow: 0 0 0 5px rgba(232, 160, 32, 0.18);
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition);
-}
-
-.teacher-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 0 7px rgba(232, 160, 32, 0.22);
-}
-
-/* ── Teacher Info Text ────────────────────── */
-.teacher-info-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  z-index: 1;
-}
-
-.teacher-info-content .text {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.72);
-  font-weight: 300;
-  letter-spacing: 0.01em;
-}
-
-.teacher-info-content .text:first-child {
-  font-family: "Fraunces", serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--white);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.15rem;
-}
-
-/* ── Student List Card ────────────────────── */
-.student-list {
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
   background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2.5rem 2.5rem;
+  border: 1px solid var(--parchment-dk);
+  border-radius: var(--r-pill);
+  padding: 0.4rem 1rem;
   box-shadow: var(--shadow-card);
+  white-space: nowrap;
 }
 
-.student-list h2 {
-  font-family: "Fraunces", serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+.teacher-page .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(76, 175, 130, 0.22);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════
+   STAT CARDS
+   ══════════════════════════════════════════ */
+.teacher-page .top-page {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 1.25rem;
+  animation: tp-fadeUp 0.45s 0.05s var(--ease-out) both;
+}
+
+.teacher-page .stat-card {
+  background: var(--white);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--parchment-dk);
+  box-shadow: var(--shadow-card);
+  padding: 1.6rem 1.75rem;
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
+  align-items: flex-start;
+  gap: 1.1rem;
+  transition:
+    box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
 }
 
-.student-list h2::after {
-  content: "";
-  display: inline-block;
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(90deg, var(--ivory-dark), transparent);
-  border-radius: 2px;
+.teacher-page .stat-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
 }
 
-/* ── Table scroll container ───────────────── */
-.student-list {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+.teacher-page .stat-card.stat-card--wide {
+  background: var(--ink);
+  border-color: transparent;
 }
 
-.student-list > table {
-  display: table;
-  width: 100%;
-  min-width: 560px;
+.teacher-page .card-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
 }
 
-/* ── Table ────────────────────────────────── */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
+.teacher-page .data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-thead tr {
-  background: var(--ivory);
-  border-radius: var(--radius-sm);
-}
-
-thead th {
-  padding: 0.85rem 1rem;
-  text-align: left;
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.75rem;
+.teacher-page .data-label {
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-light);
-  white-space: nowrap;
+  letter-spacing: 0.09em;
+  color: var(--text-ghost);
 }
 
-thead th:first-child {
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-}
-thead th:last-child {
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+.teacher-page .stat-card--wide .data-label {
+  color: rgba(245, 240, 232, 0.45);
 }
 
-tbody tr {
-  border-bottom: 1px solid var(--ivory-dark);
-  transition: background var(--transition);
+.teacher-page .value {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
-tbody tr:last-child {
-  border-bottom: none;
+.teacher-page .value.value--name {
+  font-size: 1.25rem;
+  color: var(--parchment);
+  letter-spacing: -0.02em;
 }
 
-tbody tr:hover {
-  background: rgba(247, 244, 238, 0.6);
+.teacher-page .value-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 300;
 }
 
-tbody td {
-  padding: 0.9rem 1rem;
-  color: var(--text-mid);
-  font-weight: 400;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-/* Student name column — slightly bolder */
-tbody td:nth-child(2) {
-  color: var(--navy);
+.teacher-page .value-trend {
+  font-size: 0.72rem;
   font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.02em;
 }
 
-/* Student ID — monospaced pill */
-tbody td:nth-child(1) {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-light);
+.teacher-page .teacher-image-wrap {
+  flex-shrink: 0;
+}
+
+.teacher-page .teacher-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(200, 146, 42, 0.18);
+  border: 2px solid var(--gold);
+  color: var(--gold-bright);
+  font-size: 0.9rem;
+  font-weight: 700;
   letter-spacing: 0.04em;
-}
-
-/* ── Link Buttons ─────────────────────────── */
-tbody td a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.35rem;
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 500;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  transition:
-    background var(--transition),
-    color var(--transition),
-    transform var(--transition);
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(200, 146, 42, 0.12);
 }
 
-/* Edit profile link — amber style */
-tbody td:nth-child(5) a {
-  color: var(--amber);
-  background: rgba(232, 160, 32, 0.1);
+/* ══════════════════════════════════════════
+   SKELETON
+   ══════════════════════════════════════════ */
+.teacher-page .skeleton {
+  display: inline-block;
+  border-radius: var(--r-xs);
+  background: linear-gradient(
+    90deg,
+    var(--parchment) 25%,
+    var(--parchment-mid) 50%,
+    var(--parchment) 75%
+  );
+  background-size: 200% 100%;
+  animation: tp-shimmer 1.5s infinite;
 }
 
-tbody td:nth-child(5) a:hover {
-  background: rgba(232, 160, 32, 0.22);
-  transform: translateY(-1px);
+.teacher-page .skeleton.skeleton--circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
 }
 
-/* Upload result link — navy style */
-tbody td:nth-child(6) a {
-  color: var(--navy-mid);
-  background: rgba(26, 35, 64, 0.07);
+@keyframes tp-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
-tbody td:nth-child(6) a:hover {
-  background: rgba(26, 35, 64, 0.14);
-  transform: translateY(-1px);
+@keyframes tp-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.term-action {
-  display: none;
-  position: absolute;
-  background-color: var(--white);
+
+/* ══════════════════════════════════════════
+   BOTTOM TABLE CARD
+   overflow:visible is required so the
+   absolute-positioned dropdown is never clipped
+   ══════════════════════════════════════════ */
+.teacher-page .bottom-page {
+  background: var(--cream);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--parchment-dk);
+  box-shadow: var(--shadow-card);
+  overflow: visible;
+  animation: tp-fadeUp 0.45s 0.1s var(--ease-out) both;
 }
-.term-action div {
-  padding: 0.3rem 0.85rem;
-  border-radius: 20px;
+
+.teacher-page .table-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.75rem 2.25rem 1.25rem;
+  border-bottom: 1px solid var(--parchment-dk);
+}
+
+.teacher-page .table-header-left h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-heading);
+  letter-spacing: -0.015em;
+}
+
+.teacher-page .table-header-left p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.teacher-page .table-count {
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  color: var(--gold);
+  background: var(--gold-pale);
+  border: 1px solid rgba(200, 146, 42, 0.22);
+  border-radius: var(--r-pill);
+  padding: 0.3rem 0.9rem;
   white-space: nowrap;
 }
 
-button:hover .term-action {
+/* ── Scroll wrapper ──
+   overflow-x: auto  → horizontal scroll for wide tables
+   overflow-y: visible → never clips the dropdown vertically
+   ── */
+.teacher-page .table-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 2.25rem 2rem;
+}
+
+/* ══════════════════════════════════════════
+   TABLE
+   ══════════════════════════════════════════ */
+.teacher-page table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  overflow: visible;
+}
+
+.teacher-page thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.67rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-ghost);
+  white-space: nowrap;
+  border-bottom: 1.5px solid var(--parchment-dk);
+}
+
+.teacher-page thead th:first-child {
+  padding-left: 0.25rem;
+}
+.teacher-page thead th:last-child {
+  padding-right: 0.25rem;
+}
+
+.teacher-page tbody tr {
+  transition: background var(--dur) var(--ease);
+}
+
+.teacher-page tbody tr:hover {
+  background: var(--parchment);
+}
+
+.teacher-page tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.teacher-page tbody td {
+  padding: 0.95rem 1rem;
+  vertical-align: middle;
+  color: var(--text-body);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--parchment-mid);
+  overflow: visible;
+}
+
+.teacher-page tbody tr:last-child td {
+  border-bottom: none;
+}
+.teacher-page tbody td:first-child {
+  padding-left: 0.25rem;
+}
+.teacher-page tbody td:last-child {
+  padding-right: 0.25rem;
+  overflow: visible;
+}
+
+.teacher-page .td-sn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-ghost);
+  width: 36px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Name cell ── */
+.teacher-page .name-cell {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher-page .avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--gold-bright);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid var(--parchment-dk);
+  box-shadow: 0 1px 4px rgba(22, 24, 31, 0.14);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.teacher-page tbody tr:hover .avatar {
+  transform: scale(1.08);
+  box-shadow: 0 3px 10px rgba(22, 24, 31, 0.2);
+}
+
+.teacher-page .name-text {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-heading);
+}
+
+/* ── Reg number pill ── */
+.teacher-page .username-cell {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  background: var(--parchment);
+  border: 1px solid var(--parchment-dk);
+  border-radius: var(--r-pill);
+  padding: 0.18rem 0.65rem;
+  display: inline-block;
+}
+
+/* ── State badge ── */
+.teacher-page .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+  background: var(--parchment-mid);
+  border: 1px solid var(--parchment-dk);
+  border-radius: var(--r-pill);
+  padding: 0.2rem 0.7rem;
+}
+
+/* ── Row actions ── */
+.teacher-page .row-actions {
+  display: flex;
+  align-items: center;
+}
+
+.teacher-page .row-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0.3rem 0.78rem;
+  border-radius: var(--r-pill);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--gold);
+  background: var(--gold-pale);
+  border: 1px solid rgba(200, 146, 42, 0.2);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.teacher-page .row-action-btn:hover {
+  background: var(--gold-glow);
+  border-color: rgba(200, 146, 42, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════
+   EMPTY STATE
+   ══════════════════════════════════════════ */
+.teacher-page .empty-state {
+  text-align: center;
+  padding: 3.5rem 1rem;
+}
+
+.teacher-page .empty-state-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.teacher-page .empty-state h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.4rem;
+}
+
+.teacher-page .empty-state p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════
+   PRINT RESULT DROPDOWN
+   ══════════════════════════════════════════
+   Anchor  : .print-result-btn  (position:relative)
+   Panel   : .term-action       (position:absolute)
+   Gap seal: ::before pseudo    (transparent 8px bridge)
+   Sustain : .term-action:hover (keeps panel open once entered)
+   ══════════════════════════════════════════ */
+.teacher-page .print-result-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.3rem 0.82rem;
+  border-radius: var(--r-pill);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--ink-mid);
+  background: rgba(22, 24, 31, 0.07);
+  border: 1px solid rgba(22, 24, 31, 0.12);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.teacher-page .print-result-btn:hover {
+  background: rgba(22, 24, 31, 0.13);
+  transform: translateY(-1px);
+}
+
+/* Caret icon */
+.teacher-page .print-result-btn::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 4.5px solid currentColor;
+  opacity: 0.45;
+  transition: transform var(--dur) var(--ease);
+}
+
+.teacher-page .print-result-btn:hover::after {
+  transform: rotate(180deg);
+  opacity: 0.7;
+}
+
+/* Invisible bridge — seals the gap between button and panel */
+.teacher-page .print-result-btn::before {
+  content: "";
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0;
-}
-.first-term,
-.second-term,
-.third-term {
-  background-color: var(--amber);
-  color: var(--white);
-  margin-bottom: 0.25rem;
-}
-.first-term:hover,
-.second-term:hover,
-.third-term:hover {
-  background-color: #1a2340;
+  bottom: -8px;
+  left: -4px;
+  right: -4px;
+  height: 8px;
+  background: transparent;
 }
 
-/* ── Responsive: Tablet ───────────────────── */
-@media (max-width: 768px) {
+/* ── Panel ── */
+.teacher-page .term-action {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  background: var(--white);
+  border-radius: var(--r-md);
+  border: 1px solid var(--parchment-dk);
+  box-shadow: var(--shadow-dropdown);
+  padding: 5px;
+  z-index: 9999;
+  min-width: 128px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px) scale(0.97);
+  transform-origin: top left;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.teacher-page .print-result-btn:hover .term-action {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.teacher-page .term-action:hover {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Term options ── */
+.teacher-page .first-term,
+.teacher-page .second-term,
+.teacher-page .third-term {
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--r-sm);
+  font-size: 0.77rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--text-body);
+  background: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition:
+    background var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.teacher-page .first-term::before {
+  content: "①";
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+.teacher-page .second-term::before {
+  content: "②";
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+.teacher-page .third-term::before {
+  content: "③";
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+
+.teacher-page .first-term:hover,
+.teacher-page .second-term:hover,
+.teacher-page .third-term:hover {
+  background: var(--ink);
+  color: var(--parchment);
+  transform: translateX(3px);
+}
+
+.teacher-page .first-term:hover::before,
+.teacher-page .second-term:hover::before,
+.teacher-page .third-term:hover::before {
+  color: var(--gold-bright);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
   .teacher-page {
-    padding: 1.5rem 1rem 3rem;
+    padding: 2rem 1.25rem 4rem;
   }
-
-  .teacher-info {
-    padding: 1.5rem;
-    gap: 1.25rem;
+  .teacher-page .top-page {
+    grid-template-columns: 1fr 1fr;
   }
-
-  .teacher-image {
-    width: 70px;
-    height: 70px;
+  .teacher-page .stat-card--wide {
+    grid-column: 1 / -1;
   }
-
-  .teacher-info-content .text:first-child {
-    font-size: 1.2rem;
+  .teacher-page .table-scroll {
+    padding: 0 1.25rem 1.75rem;
   }
-
-  .student-list {
-    padding: 1.5rem 1rem 2rem;
+  .teacher-page .table-header {
+    padding: 1.5rem 1.25rem 1rem;
   }
 }
 
-/* ── Responsive: Mobile ───────────────────── */
-@media (max-width: 480px) {
-  .teacher-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+@media (max-width: 600px) {
+  .teacher-page {
+    padding: 1.5rem 1rem 4rem;
+  }
+  .teacher-page .top-page {
+    grid-template-columns: 1fr;
+  }
+  .teacher-page .page-header-text h1 {
+    font-size: 1.5rem;
+  }
+  .teacher-page .table-scroll {
+    padding: 0 1rem 1.5rem;
+  }
+  .teacher-page .table-header {
+    padding: 1.25rem 1rem 0.9rem;
   }
 
-  .teacher-info::before {
-    width: 100%;
-    height: 5px;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-
-  .teacher-image {
-    width: 64px;
-    height: 64px;
-  }
-
-  .teacher-info-content .text:first-child {
-    font-size: 1.1rem;
-  }
-
-  .student-list h2 {
-    font-size: 1.15rem;
-  }
-
-  thead th,
-  tbody td {
-    padding: 0.7rem 0.75rem;
-    font-size: 0.82rem;
+  /* Flip dropdown right on small screens to avoid viewport clip */
+  .teacher-page .term-action {
+    left: auto;
+    right: 0;
   }
 }
