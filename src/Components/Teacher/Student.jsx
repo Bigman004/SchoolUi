@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import { useState } from "react";
 import { useEffect } from "react";
-import { listStudent2 } from "../Service/Service";
+import { listStudent2 } from "../../Service/Service";
 
 const Student = () => {
   const [studentList, setStudentList] = useState([]);

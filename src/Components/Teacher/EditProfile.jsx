@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import "./AddStudent.css";
+import { getStudentDetails, postStudentDetails } from "../../Service/Service";
 import Nav from "./Nav";
-import { addStudent } from "../Service/Service";
-
-export default function AddStudent() {
+const EditProfile = () => {
+  const { id } = useParams();
+  const [status, setStatus] = useState({ loading: false, message: "" });
   const [student, setStudent] = useState({
+    id: id,
     firstName: "",
     lastName: "",
     stateOfOrigin: "",
@@ -14,41 +17,35 @@ export default function AddStudent() {
     parentPhone: "",
     homeAddress: "",
   });
-
-  const [status, setStatus] = useState({ loading: false, message: "" });
-
+  useEffect(() => {
+    async function getStudent(id) {
+      const std = await getStudentDetails(id);
+      console.log(std);
+      Object.keys(student).map((info) => {
+        setStudent((prev) => ({ ...prev, [info]: std[info] }));
+      });
+    }
+    getStudent(id);
+  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ loading: true, message: "" });
+    const response = await postStudentDetails(student);
+    setStatus({ loading: false, message: "✅ uploaded changes successful!" });
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudent((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ loading: true, message: "" });
-
-    try {
-      const response = await addStudent(student);
-
-      setStatus({ loading: false, message: "✅ Student added successfully!" });
-      setStudent({
-        firstName: "",
-        lastName: "",
-        stateOfOrigin: "",
-        dateOfBirth: "",
-        lga: "",
-        parentPhone: "",
-        homeAddress: "",
-      });
-    } catch (error) {
-      setStatus({ loading: false, message: "❌ Failed to add student." });
-    }
-  };
-
   return (
-    <>
+    <div>
+      {" "}
       <Nav />
       <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Add Student</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center">
+          Edit student profile
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="text"
@@ -117,7 +114,7 @@ export default function AddStudent() {
             disabled={status.loading}
             className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
           >
-            {status.loading ? "Saving..." : "Add Student"}
+            {status.loading ? "Saving..." : "upload changes"}
           </button>
         </form>
 
@@ -125,6 +122,8 @@ export default function AddStudent() {
           <p className="text-center mt-3 font-medium">{status.message}</p>
         )}
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default EditProfile;

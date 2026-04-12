@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAttendanceDate } from "../Service/Service";
+import { getAttendanceDate } from "../../Service/Service";
 import "./ReviewAttendanceDate.css";
 import Nav from "./Nav";
 

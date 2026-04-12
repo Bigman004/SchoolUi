@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { listResult } from "../Service/Service";
+import { listResult } from "../../Service/Service";
 import { useNavigate } from "react-router-dom";
 import "./ResultList.css";
 import Nav from "./Nav";

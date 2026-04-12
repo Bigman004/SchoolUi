@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import password_icon from "../assets/images/password.png";
-import { changeUserPassword } from "../Service/Service";
+import password_icon from "../../assets/images/password.png";
+import { changeUserPassword } from "../../Service/Service";
 import "./ChangePassword.css";
 import Nav from "./Nav";
 const ChangePassword = () => {
@@ -22,10 +22,10 @@ const ChangePassword = () => {
             async function changePassword() {
               const response = await changeUserPassword(
                 {
-                  registrationNumber: teacherRegNo,
+                  registrationNumber: null,
                   password: password,
                 },
-                newPassword
+                newPassword,
               );
               if (response.status === 200) {
                 alert("password changed successfully");

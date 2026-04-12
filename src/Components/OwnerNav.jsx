@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Nav.css";
+import "./Teacher/Nav.css";
 import { NavLink } from "react-router-dom";
 
 const OwnerNav = () => {
@@ -29,11 +29,14 @@ const OwnerNav = () => {
         <NavLink to="/check_payment" onClick={() => setMenuOpen(false)}>
           check payment
         </NavLink>
-        <NavLink to="/create_bill" onClick={() => setMenuOpen(false)}>
+        <NavLink to="/billing" onClick={() => setMenuOpen(false)}>
           create bill
         </NavLink>
 
-        <NavLink to={`/change-password`} onClick={() => setMenuOpen(false)}>
+        <NavLink
+          to={`/change-password/${"undefined"}`}
+          onClick={() => setMenuOpen(false)}
+        >
           Password
         </NavLink>
       </div>

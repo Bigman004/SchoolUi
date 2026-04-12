@@ -2,19 +2,21 @@ import { useState } from "react";
 import "./App.css";
 import Login from "./Components/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TeacherPage from "./Components/TeacherPage";
-import AddStudent from "./Components/add_student";
-import Result from "./Components/Result";
-import Student from "./Components/Student";
-import EditProfile from "./Components/EditProfile";
-import ResultList from "./Components/ResultList";
-import ChangePassword from "./Components/ChangePassword";
-import Attendance from "./Components/Attendance";
-import ReviewAttendancePage from "./Components/ReviewAttendancePage";
-import ReviewAttendanceDate from "./Components/ReviewAttendanceDate";
+import TeacherPage from "./Components/Teacher/TeacherPage";
+import AddStudent from "./Components/Teacher/add_student";
+import Result from "./Components/Teacher/Result";
+import Student from "./Components/Teacher/Student";
+import EditProfile from "./Components/Teacher/EditProfile";
+import ResultList from "./Components/Teacher/ResultList";
+import ChangePassword from "./Components/Teacher/ChangePassword";
+import Attendance from "./Components/Teacher/Attendance";
+import ReviewAttendancePage from "./Components/Teacher/ReviewAttendancePage";
+import ReviewAttendanceDate from "./Components/Teacher/ReviewAttendanceDate";
 import OwnerPage from "./Components/OwnerPage";
 import AddTeacher from "./Components/AddTeacher";
 import Error1 from "./Components/Error/Error1";
+import Billing from "./Components/Billing";
+import CheckPayment from "./Components/CheckPayment";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -51,6 +53,8 @@ function App() {
           element={<ChangePassword />}
         />
         <Route path="/error_page" element={<Error1 />} />
+        <Route path="/billing" element={<Billing />} />
+        <Route path="/check_payment" element={<CheckPayment />} />
       </Routes>
     </>
   );

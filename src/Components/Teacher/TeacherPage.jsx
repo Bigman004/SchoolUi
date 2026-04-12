@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./TeacherPage.css";
 import Nav from "./Nav";
-import { listStudent2, printResult } from "../Service/Service";
-import { generateResult } from "../Service/PdfTemplate";
+import { listStudent2, printResult } from "../../Service/Service";
+import { generateResult } from "../../Service/PdfTemplate";
 
 /* ── Helper: initials from full name ── */
 const getInitials = (first = "", last = "") =>

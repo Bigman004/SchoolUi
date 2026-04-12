@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
-import { getTeacher } from "../Service/Service";
+import { getTeacher } from "../../Service/Service";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {

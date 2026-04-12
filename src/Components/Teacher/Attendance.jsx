@@ -1,9 +1,9 @@
 import React from "react";
-import { listStudent2 } from "../Service/Service";
+import { listStudent2 } from "../../Service/Service";
 import { useEffect, useState } from "react";
 import Nav from "./Nav";
 import "./Attendance.css";
-import { markStudentById } from "../Service/Service";
+import { markStudentById } from "../../Service/Service";
 import { Link } from "react-router-dom";
 const Attendance = () => {
   const [students, setStudents] = useState([]);

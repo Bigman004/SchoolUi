@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./AddStudent.css";
+import "./Teacher/AddStudent.css";
 import OwnerNav from "./OwnerNav";
 import { addTeacher } from "../Service/OwnerService";
 

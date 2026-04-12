@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import "./Result.css";
 
 import Nav from "./Nav";
-import { getStudentResult, postResultbyterm } from "../Service/Service";
+import { getStudentResult, postResultbyterm } from "../../Service/Service";
 import { useParams } from "react-router-dom";
 
 const Result = () => {
