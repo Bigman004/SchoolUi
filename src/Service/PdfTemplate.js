@@ -9,8 +9,8 @@ export const generateResult = (resultData) => {
   const student = {
     name: resultData.studentFirstName + " " + resultData.studentLastName,
     id: "STU/2025/00421",
-    class: "primary 4",
-    term: term,
+    class: resultData.studentClass,
+    term: resultData.examResult.term,
     session: "2025/2026",
   };
   let results = [];
