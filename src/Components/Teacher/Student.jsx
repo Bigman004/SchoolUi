@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import { useState } from "react";
 import { useEffect } from "react";
 import { listStudent2 } from "../../Service/Service";
+import "./Student.css";
 
 const Student = () => {
   const [studentList, setStudentList] = useState([]);
@@ -15,40 +16,77 @@ const Student = () => {
     }
     fetchData();
   }, []);
+
+  // ...
   return (
     <>
-      <div>
-        <Nav />
-        <div className="student-list">
-          <h2>Student List</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Parent phone</th>
-                <th>state of origin</th>
-                <th>Lga</th>
-                <th>Home address</th>
-                <th>date of birth</th>
-              </tr>
-            </thead>
-            {studentList.map((student, index) => (
-              <tbody>
+      <Nav />
+      <div className="student-list">
+        <div className="page-top">
+          <div>
+            <h2>Student List</h2>
+            <p>All enrolled students</p>
+          </div>
+          <div className="top-right">
+            <span className="student-count">{studentList.length} students</span>
+          </div>
+        </div>
+
+        <div className="table-card">
+          <div className="table-scroll">
+            <table>
+              <thead>
                 <tr>
-                  <td>{student.id}</td>
-                  <td>
-                    {student.firstName + ""} {student.lastName}
-                  </td>
-                  <td>{student.parentPhone}</td>
-                  <td>{student.stateOfOrigin}</td>
-                  <td>{student.lga}</td>
-                  <td>{student.homeAddress}</td>
-                  <td>{student.dateOfBirth}</td>
+                  <th>Student</th>
+                  <th>Student ID</th>
+                  <th>Parent phone</th>
+                  <th>State</th>
+                  <th>LGA</th>
+                  <th>Address</th>
+                  <th>Date of birth</th>
                 </tr>
+              </thead>
+              <tbody>
+                {studentList.map((student) => (
+                  <tr key={student.id}>
+                    <td>
+                      <div className="name-cell">
+                        <div className="avatar">
+                          {student.firstName[0]}
+                          {student.lastName[0]}
+                        </div>
+                        <span className="name-text">
+                          {student.firstName} {student.lastName}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <span className="id-pill">{student.id}</span>
+                    </td>
+                    <td>
+                      <span className="phone-text">{student.parentPhone}</span>
+                    </td>
+                    <td>
+                      <span className="state-badge">
+                        {student.stateOfOrigin}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="lga-text">{student.lga}</span>
+                    </td>
+                    <td>
+                      <span className="address-text">
+                        {student.homeAddress}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="dob-text">{student.dateOfBirth}</span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
-            ))}
-          </table>
+            </table>
+          </div>
         </div>
       </div>
     </>

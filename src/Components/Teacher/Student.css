@@ -1,0 +1,176 @@
+.student-list {
+  /* Color Palette & Variables */
+  --ink: #16181f;
+  --ink-mid: #23273a;
+  --parchment: #f5f0e8;
+  --parchment-mid: #ede5d8;
+  --parchment-dk: #d9cfc0;
+  --gold: #c8922a;
+  --gold-bright: #e5ab42;
+  --gold-pale: rgba(200, 146, 42, 0.11);
+  --gold-glow: rgba(200, 146, 42, 0.22);
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --green: #4caf82;
+
+  --text-heading: #16181f;
+  --text-body: #3a3f55;
+  --text-muted: #7a8099;
+  --text-ghost: #a8adc0;
+  --text-dim: rgba(245, 240, 232, 0.52);
+
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  --shadow-card:
+    0 1px 3px rgba(22, 24, 31, 0.07), 0 4px 20px rgba(22, 24, 31, 0.09);
+  --shadow-lift:
+    0 8px 32px rgba(22, 24, 31, 0.18), 0 2px 8px rgba(22, 24, 31, 0.1);
+  --shadow-dropdown:
+    0 4px 6px rgba(22, 24, 31, 0.08), 0 14px 40px rgba(22, 24, 31, 0.22);
+
+  /* Layout */
+  margin: auto;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1.5rem; /* Added this back to ensure spacing between header and table */
+
+  color: var(--text-body);
+}
+
+.student-list .page-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-list .page-top h2 {
+  color: var(--text-heading);
+  margin: 0 0 0.25rem 0;
+}
+
+.student-list .page-top p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.student-count {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gold);
+  background-color: var(--gold-pale);
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-pill);
+}
+
+.table-card {
+  background-color: var(--white);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  padding: 1rem;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--r-sm);
+  /* Replaced the dark inset shadow with a subtle border using the palette */
+  border: 1px solid var(--parchment-mid);
+}
+
+/* --- Table & Table Header Styling --- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead {
+  background-color: var(--ink);
+}
+
+th {
+  color: var(--parchment);
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 3px solid var(--gold);
+  white-space: nowrap;
+}
+
+th:first-child {
+  border-top-left-radius: var(--r-sm);
+}
+
+th:last-child {
+  border-top-right-radius: var(--r-sm);
+}
+
+/* Basic padding to make the rows readable without adding specific component styles */
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--parchment-mid);
+  color: var(--text-body);
+  white-space: nowrap; /* Prevents awkward text wrapping inside cells on mobile */
+}
+
+tr:hover td {
+  background-color: var(--cream);
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+========================================= */
+
+/* Tablets and smaller desktops */
+@media (max-width: 992px) {
+  .student-list {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  .student-list {
+    margin-top: 20%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    gap: 1rem;
+  }
+
+  /* Stack the title and the student count on small screens */
+  .student-list .page-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Reduce padding on the card so it doesn't waste screen real estate */
+  .table-card {
+    padding: 0.5rem;
+  }
+
+  /* Slightly tighten table cell padding for mobile */
+  th,
+  td {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .student-count {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

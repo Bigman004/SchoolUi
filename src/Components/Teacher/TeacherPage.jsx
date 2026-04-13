@@ -159,10 +159,10 @@ export const TeacherPage = () => {
                   <th>S/N</th>
                   <th>Student</th>
                   <th>Student ID</th>
-                  <th>Parent Phone</th>
-                  <th>State of Origin</th>
-                  <th>Edit</th>
                   <th>Result</th>
+                  <th>parent phone</th>
+                  <th>state of origin</th>
+                  <th>edit</th>
                 </tr>
               </thead>
 
@@ -216,26 +216,6 @@ export const TeacherPage = () => {
                         </span>
                       </td>
 
-                      {/* Parent phone */}
-                      <td>{student.parentPhone}</td>
-
-                      {/* State of origin */}
-                      <td>
-                        <span className="badge">{student.stateOfOrigin}</span>
-                      </td>
-
-                      {/* Edit profile */}
-                      <td>
-                        <div className="edit-btn">
-                          <Link
-                            to={`/edit/${student.id}`}
-                            className="row-action-btn"
-                          >
-                            ✏️ Edit
-                          </Link>
-                        </div>
-                      </td>
-
                       {/* Print result dropdown */}
                       <td>
                         <div className="print-result-btn">
@@ -267,6 +247,24 @@ export const TeacherPage = () => {
                             </div>
                           </div>
                         </div>
+                      </td>
+                      {/* Parent phone */}
+                      <td>{student.parentPhone}</td>
+                      {/* Edit profile */}
+                      <td>
+                        <div className="edit-btn">
+                          <Link
+                            to={`/edit/${student.id}`}
+                            className="row-action-btn"
+                          >
+                            ✏️ Edit
+                          </Link>
+                        </div>
+                      </td>
+
+                      {/* State of origin */}
+                      <td>
+                        <span className="badge">{student.stateOfOrigin}</span>
                       </td>
                     </tr>
                   ))
