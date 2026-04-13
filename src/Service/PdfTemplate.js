@@ -8,7 +8,7 @@ export const generateResult = (resultData) => {
   let { id, studentId, term, type, ...result } = resultData.examResult;
   const student = {
     name: resultData.studentFirstName + " " + resultData.studentLastName,
-    id: "STU/2025/00421",
+    id: resultData.regNumber,
     class: resultData.studentClass,
     term: resultData.examResult.term,
     session: "2025/2026",
