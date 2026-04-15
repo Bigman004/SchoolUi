@@ -93,10 +93,11 @@ const OwnerPage = () => {
             <span className="card-icon">📅</span>
             <div className="data-item">
               <span className="data-label">Days school open</span>
-              <span className="value-sm">
-                {ownerData[0]?.schoolOpens}
-                <span className="value-suffix">days</span>
-              </span>
+              {loading ? (
+                <span className="skeleton" style={{ width: 60, height: 40 }} />
+              ) : (
+                <span className="value">{ownerData[0]?.schoolOpens} days</span>
+              )}
               <span className="value-trend">↑ This session</span>
             </div>
           </div>
