@@ -61,7 +61,14 @@ const Attendance = () => {
                     </button>
                     <button
                       onClick={() => {
-                        markStudentById(student.id, false);
+                        const response = markStudentById(student.id, false);
+                        response.then((data) => {
+                          if (data) {
+                            alert("Student marked as absent");
+                          } else {
+                            alert("Failed to mark student as absent");
+                          }
+                        });
                       }}
                     >
                       Mark Absent

@@ -12,6 +12,14 @@ const AddTeacher = () => {
   });
 
   const [status, setStatus] = useState({ loading: false, message: "" });
+  const classList = [
+    "primary 1",
+    "primary 2",
+    "primary 3",
+    "primary 4",
+    "primary 5",
+    "primary 6",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,15 +72,20 @@ const AddTeacher = () => {
             required
             className="w-full border p-2 rounded"
           />
-          <input
-            type="text"
+          <select
             name="teacherClass"
             value={teacher.teacherClass}
             onChange={handleChange}
-            placeholder="select a class"
             required
             className="w-full border p-2 rounded"
-          />
+          >
+            <option value="">Select Teacher Class</option>
+            {classList.map((studentClass) => (
+              <option key={studentClass} value={studentClass}>
+                {studentClass}
+              </option>
+            ))}
+          </select>
           {/* <input
             type="tel"
             name="parentPhone"

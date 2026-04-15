@@ -4,6 +4,14 @@
    Prevents bleed into OwnerPage without deep chain selectors.
    Fonts  : Playfair Display + Instrument Sans
    Palette: Ink · warm parchment · burnished gold
+
+   ISOLATION NOTES
+   ───────────────
+   ✅  CSS variables  → scoped to .teacher-page, not :root
+   ✅  All selectors  → prefixed with .teacher-page
+   ✅  Keyframes      → prefixed "teacherpage-" (globally unique)
+   ✅  Reset          → scoped to .teacher-page *, not * {}
+   ⚠️  Google Fonts   → global by nature; harmless but shared
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Instrument+Sans:wght@300;400;500;600&display=swap");
@@ -91,7 +99,7 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  animation: tp-fadeUp 0.45s var(--ease-out) both;
+  animation: teacherpage-fadeUp 0.45s var(--ease-out) both;
 }
 
 .teacher-page .page-header-text h1 {
@@ -140,7 +148,7 @@
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
   gap: 1.25rem;
-  animation: tp-fadeUp 0.45s 0.05s var(--ease-out) both;
+  animation: teacherpage-fadeUp 0.45s 0.05s var(--ease-out) both;
 }
 
 .teacher-page .stat-card {
@@ -254,7 +262,7 @@
     var(--parchment) 75%
   );
   background-size: 200% 100%;
-  animation: tp-shimmer 1.5s infinite;
+  animation: teacherpage-shimmer 1.5s infinite;
 }
 
 .teacher-page .skeleton.skeleton--circle {
@@ -264,7 +272,9 @@
   display: flex;
 }
 
-@keyframes tp-shimmer {
+/* ── Keyframes: prefixed "teacherpage-" so they never clash
+   with animations in Student.css, OwnerPage.css, etc. ── */
+@keyframes teacherpage-shimmer {
   0% {
     background-position: 200% 0;
   }
@@ -273,7 +283,7 @@
   }
 }
 
-@keyframes tp-fadeUp {
+@keyframes teacherpage-fadeUp {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -295,7 +305,7 @@
   border: 1px solid var(--parchment-dk);
   box-shadow: var(--shadow-card);
   overflow: visible;
-  animation: tp-fadeUp 0.45s 0.1s var(--ease-out) both;
+  animation: teacherpage-fadeUp 0.45s 0.1s var(--ease-out) both;
 }
 
 .teacher-page .table-header {

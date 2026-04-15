@@ -16,6 +16,45 @@ export default function AddStudent() {
   });
 
   const [status, setStatus] = useState({ loading: false, message: "" });
+  const [selectedState, setSelectedState] = useState("");
+  const stateList = [
+    "Abia",
+    "Adamawa",
+    "Akwa Ibom",
+    "Anambra",
+    "Bauchi",
+    "Bayelsa",
+    "Benue",
+    "Borno",
+    "Cross River",
+    "Delta",
+    "Ebonyi",
+    "Edo",
+    "Ekiti",
+    "Enugu",
+    "Gombe",
+    "Imo",
+    "Jigawa",
+    "Kaduna",
+    "Kano",
+    "Katsina",
+    "Kebbi",
+    "Kogi",
+    "kwara",
+    "Lagos",
+    "Nasarawa",
+    "Niger",
+    "Ogun",
+    "Ondo",
+    "Osun",
+    "Oyo",
+    "Plateau",
+    "Rivers",
+    "Sokoto",
+    "Taraba",
+    "Yobe",
+    "Zamfara",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,15 +107,21 @@ export default function AddStudent() {
             required
             className="w-full border p-2 rounded"
           />
-          <input
-            type="text"
+          <select
             name="stateOfOrigin"
             value={student.stateOfOrigin}
             onChange={handleChange}
-            placeholder="State of Origin"
             required
             className="w-full border p-2 rounded"
-          />
+          >
+            <option value="">Select State of Origin</option>
+            {stateList.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
+
           <input
             type="date"
             name="dateOfBirth"

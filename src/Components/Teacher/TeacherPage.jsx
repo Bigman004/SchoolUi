@@ -161,8 +161,8 @@ export const TeacherPage = () => {
                   <th>Student ID</th>
                   <th>Result</th>
                   <th>parent phone</th>
-                  <th>state of origin</th>
                   <th>edit</th>
+                  <th>state of origin</th>
                 </tr>
               </thead>
 

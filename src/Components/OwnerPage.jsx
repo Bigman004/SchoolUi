@@ -94,7 +94,8 @@ const OwnerPage = () => {
             <div className="data-item">
               <span className="data-label">Days school open</span>
               <span className="value-sm">
-                200<span className="value-suffix">days</span>
+                {ownerData[0]?.schoolOpens}
+                <span className="value-suffix">days</span>
               </span>
               <span className="value-trend">↑ This session</span>
             </div>

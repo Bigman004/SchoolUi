@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const ReviewAttendancePage = () => {
   const [dateList, setDateList] = useState([]);
-  const startTerm = new Date("2026-01-12");
-  const endTerm = new Date("2026-03-18");
+  const startTerm = new Date("2026-04-12");
+  const endTerm = new Date("2026-05-18");
   const navigate = useNavigate();
   const monthNames = [
     "January",
