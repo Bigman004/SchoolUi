@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import password_icon from "../../assets/images/password.png";
+import password_icon from "../assets/images/password.png";
 import { changeUserPassword } from "../Service/Service";
 import "./ChangePassword.css";
 import OwnerNav from "./OwnerNav";
