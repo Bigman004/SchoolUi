@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import password_icon from "../assets/images/password.png";
 import { changeUserPassword } from "../Service/Service";
-import "./ChangePassword.css";
+import "./Teacher/ChangePassword.css";
 import OwnerNav from "./OwnerNav";
 const OwnerChangePassword = () => {
   const { teacherRegNo } = useParams();
