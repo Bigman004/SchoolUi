@@ -33,10 +33,7 @@ const OwnerNav = () => {
           create bill
         </NavLink>
 
-        <NavLink
-          to={`/change-password/${"undefined"}`}
-          onClick={() => setMenuOpen(false)}
-        >
+        <NavLink to="/admin-change-password" onClick={() => setMenuOpen(false)}>
           Password
         </NavLink>
       </div>
