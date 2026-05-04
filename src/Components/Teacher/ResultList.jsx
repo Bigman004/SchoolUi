@@ -16,8 +16,6 @@ const ResultList = () => {
   const handleClick = (info) => {
     navigate(`/result/${info}`);
   };
-
-  console.log(list);
   return (
     <>
       <Nav />

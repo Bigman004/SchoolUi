@@ -15,14 +15,6 @@ OwnerService.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-
-    console.log("Request:", {
-      method: config.method?.toUpperCase(),
-      url: config.url,
-      data: config.data,
-      headers: config.headers,
-    });
-
     return config;
   },
   (error) => {
@@ -33,12 +25,6 @@ OwnerService.interceptors.request.use(
 
 OwnerService.interceptors.response.use(
   (response) => {
-    console.log("Response: ", {
-      status: response.status,
-      data: response.data,
-      statusText: "created",
-      url: response.config.url,
-    });
     return response;
   },
   (error) => {

@@ -14,7 +14,6 @@ const Result = () => {
     async function getResult() {
       const response = await getStudentResult(info);
       setResult(response);
-      console.log(response);
     }
     getResult();
   }, []);
