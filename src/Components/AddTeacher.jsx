@@ -13,12 +13,15 @@ const AddTeacher = () => {
 
   const [status, setStatus] = useState({ loading: false, message: "" });
   const classList = [
+    "prep 1",
+    "prep 2",
+    "nursery 1",
+    "nursery",
     "primary 1",
     "primary 2",
     "primary 3",
     "primary 4",
     "primary 5",
-    "primary 6",
   ];
 
   const handleChange = (e) => {
