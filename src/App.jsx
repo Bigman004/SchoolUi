@@ -17,7 +17,11 @@ import AddTeacher from "./Components/AddTeacher";
 import Error1 from "./Components/Error/Error1";
 import Billing from "./Components/Billing";
 import CheckPayment from "./Components/CheckPayment";
+<<<<<<< HEAD
 import OwnerChangePassword from "./Components/OwnerChangePassword";
+=======
+import ChangePasswordRequest from "./Components/ChangePasswordRequest";
+>>>>>>> local
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -57,8 +61,13 @@ function App() {
         <Route path="/billing" element={<Billing />} />
         <Route path="/check_payment" element={<CheckPayment />} />
         <Route
+<<<<<<< HEAD
           path="/admin-change-password"
           element={<OwnerChangePassword />}
+=======
+          path="/change-password-request"
+          element={<ChangePasswordRequest />}
+>>>>>>> local
         />
       </Routes>
     </>

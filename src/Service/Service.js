@@ -2,7 +2,7 @@ import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 
 const Service = axios.create({
-  baseURL: "https://java-application-latest-ywhd.onrender.com",
+  baseURL: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -128,5 +128,16 @@ export async function printResult(info) {
     withCredentials: true,
   });
   return response.data;
+}
+
+export async function requestPasswordReset(username) {
+  const response = await Service.post(
+    "/send_password_link?username=" + username,
+    null,
+    {
+      withCredentials: true,
+    },
+  );
+  return response;
 }
 export default Service;
