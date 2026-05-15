@@ -143,4 +143,15 @@ export async function printResult(info) {
   });
   return response.data;
 }
+
+export async function requestPasswordReset(username) {
+  const response = await Service.post(
+    "/send_password_link?username=" + username,
+    null,
+    {
+      withCredentials: true,
+    },
+  );
+  return response;
+}
 export default Service;

@@ -9,12 +9,16 @@ const Login = () => {
   const [registrationNumber, setRegistrationNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   return (
     <>
+      {loading && <div className="login-skeleton"></div>}
       <div className="login-page">
         <div className="login-form">
+          <h2>Welcome back</h2>
+          <p>Sign in to your account</p>
           <div className="email-input input">
             <img src={user_icon} alt="" />
             <input
@@ -40,6 +44,7 @@ const Login = () => {
           <div className="action-section">
             <button
               onClick={async () => {
+                setLoading(true);
                 try {
                   setLoginMessage("Logging in...");
                   const response = await postLoginDetails2(
@@ -62,15 +67,26 @@ const Login = () => {
                   }
                 } catch (error) {
                   console.error("login failed", error);
-                  alert("invalid username or password");
-                  setLoginMessage("");
+                  setLoginMessage("invalid credentials");
+                  setLoading(false);
                 }
+                setLoading(false);
               }}
             >
               Login
             </button>
           </div>
-          <div className="login-message"> {loginMessage}</div>
+          <button
+            className="forgot-password"
+            onClick={() => navigate("/change-password-request")}
+          >
+            Forgot Password?
+          </button>
+          <div
+            className={`login-message ${loginMessage === "Logging in..." ? "login-message--success" : ""}`}
+          >
+            {loginMessage}
+          </div>
         </div>
       </div>
     </>
