@@ -51,9 +51,6 @@ const Login = () => {
                     registrationNumber,
                     password,
                   );
-                  console.log("FULL RESPONSE:", response);
-                  // This will show:
-                  // {data: ..., status: 200, headers: ..., config: ...}
 
                   if (response.status === 200) {
                     localStorage.setItem("token", response.data.token);
