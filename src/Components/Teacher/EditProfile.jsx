@@ -20,7 +20,6 @@ const EditProfile = () => {
   useEffect(() => {
     async function getStudent(id) {
       const std = await getStudentDetails(id);
-      console.log(std);
       Object.keys(student).map((info) => {
         setStudent((prev) => ({ ...prev, [info]: std[info] }));
       });
