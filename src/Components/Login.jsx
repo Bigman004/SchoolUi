@@ -51,6 +51,7 @@ const Login = () => {
                     registrationNumber,
                     password,
                   );
+                  console.log("FULL RESPONSE:", response);
                   // This will show:
                   // {data: ..., status: 200, headers: ..., config: ...}
 
@@ -65,9 +66,8 @@ const Login = () => {
                     setLoginMessage("invalid credentials");
                   }
                 } catch (error) {
-                  console.error("login failed", error);
-                  alert("invalid username or password");
-                  setLoginMessage("");
+                  setLoginMessage("invalid credentials");
+                  setLoading(false);
                 }
                 setLoading(false);
               }}
