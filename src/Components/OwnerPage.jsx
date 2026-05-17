@@ -131,7 +131,7 @@ const OwnerPage = () => {
             </span>
           </div>
 
-          <div className="table-scroll">
+          <div className="teacher-table-scroll">
             <table>
               <thead>
                 <tr>

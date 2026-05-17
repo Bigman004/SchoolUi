@@ -348,7 +348,7 @@
    overflow-x: auto  → horizontal scroll for wide tables
    overflow-y: visible → never clips the dropdown vertically
    ── */
-.teacher-page .table-scroll {
+.teacher-page .teacher-table-scroll {
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
