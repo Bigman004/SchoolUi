@@ -332,7 +332,7 @@
 }
 
 /* Scroll wrapper */
-.table-scroll {
+.owner-table-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -446,6 +446,10 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   white-space: nowrap;
+}
+.badge:hover {
+  cursor: pointer;
+  background-color: var(--amber-soft);
 }
 
 /* ── Student count + bar ── */

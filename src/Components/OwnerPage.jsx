@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getOwnerResource } from "../Service/OwnerService";
 import "./OwnerPage.css";
 import OwnerNav from "./OwnerNav";
@@ -27,6 +28,10 @@ const todayLabel = () =>
   });
 
 const OwnerPage = () => {
+  const navigate = useNavigate();
+  const viewClassData = (className) => {
+    navigate("/class_page/" + className);
+  };
   const [ownerData, setOwnerData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -131,7 +136,7 @@ const OwnerPage = () => {
             </span>
           </div>
 
-          <div className="teacher-table-scroll">
+          <div className="owner-table-scroll">
             <table>
               <thead>
                 <tr>
@@ -212,7 +217,12 @@ const OwnerPage = () => {
 
                         {/* Class badge */}
                         <td>
-                          <span className="badge">{cls}</span>
+                          <span
+                            className="badge"
+                            onClick={() => viewClassData(cls)}
+                          >
+                            {cls}
+                          </span>
                         </td>
 
                         {/* Student count + mini bar */}

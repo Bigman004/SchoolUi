@@ -1,15 +1,15 @@
 import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 // the login used for the owner is at the file dedicated for the teacher user
-const OwnerService = axios.create({
+const DeveloperService = axios.create({
   baseURL: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
 });
 
-OwnerService.interceptors.request.use(
+DeveloperService.interceptors.request.use(
   (config) => {
     // Get token from localStorage
-    const token = localStorage.getItem("token"); // Adjust the key name as needed
+    const token = localStorage.getItem("token");
 
     // Add token to headers if it exists
     if (token) {
@@ -31,7 +31,7 @@ OwnerService.interceptors.request.use(
   },
 );
 
-OwnerService.interceptors.response.use(
+DeveloperService.interceptors.response.use(
   (response) => {
     console.log("Response: ", {
       status: response.status,
@@ -50,29 +50,18 @@ OwnerService.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-export async function getOwnerResource() {
-  const response = await OwnerService.get("api/admin_page", {
+
+export async function getDeveloperResource() {
+  const response = await DeveloperService.get("/monitor/dev_log", {
     withCredentials: true,
   });
   return response.data;
 }
-export async function addTeacher(teacher) {
-  const response = await OwnerService.post("api/Admin/save_teacher", teacher, {
-    withCredentials: true,
-  });
-  return response.data;
-}
-export async function deleteStudent(id) {
-  const response = await OwnerService.delete("teacher/delete/" + id, {
-    withCredentials: true,
-  });
-  return response.data;
-}
-export async function getClassData(className) {
-  const response = await OwnerService.get("api/class_page/" + className, {
+export async function getDeveloperResourceByPage(page) {
+  const response = await DeveloperService.get(`/monitor/dev_log?page=${page}`, {
     withCredentials: true,
   });
   return response.data;
 }
 
-export default OwnerService;
+export default DeveloperService;
