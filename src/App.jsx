@@ -18,6 +18,7 @@ import Error1 from "./Components/Error/Error1";
 import Billing from "./Components/Billing";
 import CheckPayment from "./Components/CheckPayment";
 import ChangePasswordRequest from "./Components/ChangePasswordRequest";
+import OwnerChangePassword from "./Components/OwnerChangePassword";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -59,6 +60,10 @@ function App() {
         <Route
           path="/change-password-request"
           element={<ChangePasswordRequest />}
+        />
+        <Route
+          path="/admin-change-password"
+          element={<OwnerChangePassword />}
         />
       </Routes>
     </>
