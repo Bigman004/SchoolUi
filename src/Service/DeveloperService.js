@@ -64,4 +64,14 @@ export async function getDeveloperResourceByPage(page) {
   return response.data;
 }
 
+export async function getSearchResult(searchBy, searchParam, page) {
+  const response = await DeveloperService.get(
+    `/monitor/dev_log?searchBy=${searchBy}&searchParam=${searchParam}&page=${page}`,
+    {
+      withCredentials: true,
+    },
+  );
+  return response.data;
+}
+
 export default DeveloperService;
