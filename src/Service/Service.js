@@ -2,7 +2,7 @@ import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 
 const Service = axios.create({
-  baseURL: "https://java-application-latest-ywhd.onrender.com",
+  baseURL: "https://java-application-latest-ywhd.onrender.co",
   headers: { "Content-Type": "application/json" },
 });
 
