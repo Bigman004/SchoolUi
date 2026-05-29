@@ -14,7 +14,6 @@ const Attendance = () => {
       setStudents(data.list);
     });
   }, []);
-  console.log(students);
   return (
     <>
       <Nav />

@@ -13,9 +13,7 @@ const ClassView = () => {
     async function fetchData(className) {
       try {
         const response = await getClassData(className);
-        console.log(response);
         setPageData(response);
-        console.log(pageData);
       } catch (err) {
         console.error("Failed to load class data:", err);
       }
