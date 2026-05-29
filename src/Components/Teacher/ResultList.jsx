@@ -16,6 +16,10 @@ const ResultList = () => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
+    if (!terms.includes(selectedTerm) || !types.includes(selectedType)) {
+      alert("Please select a valid term and type.");
+      return;
+    }
     setLoading(true);
     try {
       const response = await listResult(selectedTerm, selectedType);
