@@ -51,22 +51,38 @@ DeveloperService.interceptors.response.use(
   },
 );
 
-export async function getDeveloperResource() {
-  const response = await DeveloperService.get("/monitor/dev_log", {
+export async function getDeveloperResource(d) {
+  var date = d;
+  if (date === undefined) date = "";
+
+  const response = await DeveloperService.get("/monitor/dev_log?date=" + date, {
     withCredentials: true,
   });
   return response.data;
 }
-export async function getDeveloperResourceByPage(page) {
-  const response = await DeveloperService.get(`/monitor/dev_log?page=${page}`, {
+export async function getDeveloperResourceByPage(page, d) {
+  var date = d;
+  if (date === undefined) date = "";
+  const response = await DeveloperService.get(
+    `/monitor/dev_log?page=${page}&date=${date}`,
+    {
+      withCredentials: true,
+    },
+  );
+  return response.data;
+}
+export async function addSchool(school) {
+  const response = await DeveloperService.post("developer/add_school", school, {
     withCredentials: true,
   });
-  return response.data;
+  return response;
 }
 
-export async function getSearchResult(searchBy, searchParam, page) {
+export async function getSearchResult(searchBy, searchParam, page, d) {
+  var date = d;
+  if (date === undefined) date = "";
   const response = await DeveloperService.get(
-    `/monitor/dev_log?searchBy=${searchBy}&searchParam=${searchParam}&page=${page}`,
+    `/monitor/dev_log?searchBy=${searchBy}&searchParam=${searchParam}&page=${page}&date=${date}`,
     {
       withCredentials: true,
     },

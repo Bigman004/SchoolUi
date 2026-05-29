@@ -4,11 +4,12 @@ import {
   getDeveloperResourceByPage,
   getSearchResult,
 } from "../../Service/DeveloperService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./DeveloperPage.css";
 import DeveloperNav from "./DeveloperNav";
 
 const DeveloperPage = () => {
+  const { date } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [developerData, setDeveloperData] = useState(null);
@@ -29,11 +30,17 @@ const DeveloperPage = () => {
             searchBy,
             searchParam,
             currentPage + 1,
+            date,
           );
+          setDeveloperData(response);
           setLogData(response.content);
           return;
         }
-        const response = await getDeveloperResourceByPage(currentPage + 1);
+        const response = await getDeveloperResourceByPage(
+          currentPage + 1,
+          date,
+        );
+        setDeveloperData(response);
         setLogData(response.content);
       }
       fetchData();
@@ -54,12 +61,18 @@ const DeveloperPage = () => {
             searchBy,
             searchParam,
             currentPage - 1,
+            date,
           );
           setLogData(response.content);
+          setDeveloperData(response);
           return;
         }
-        const response = await getDeveloperResourceByPage(currentPage - 1);
+        const response = await getDeveloperResourceByPage(
+          currentPage - 1,
+          date,
+        );
         setLogData(response.content);
+        setDeveloperData(response);
       }
       fetchData();
     } catch (err) {
@@ -87,6 +100,7 @@ const DeveloperPage = () => {
           searchBy,
           searchParam,
           currentPage,
+          date,
         );
         setLogData(response.content);
         setDeveloperData(response);
@@ -106,7 +120,7 @@ const DeveloperPage = () => {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await getDeveloperResource();
+        const response = await getDeveloperResource(date);
         setLoading(false);
         setDeveloperData(response);
         setLogData(response.content);
@@ -119,7 +133,7 @@ const DeveloperPage = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [date]);
   return (
     <>
       <DeveloperNav />
@@ -130,7 +144,7 @@ const DeveloperPage = () => {
           {!loading ? (
             <>
               <span className="dev-date">
-                {new Date().toLocaleDateString()}
+                {date || new Date().toLocaleDateString()}
               </span>
               <span className="app-title">Aspark SchoolApplication</span>
             </>

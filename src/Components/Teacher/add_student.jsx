@@ -13,6 +13,7 @@ export default function AddStudent() {
     lga: "",
     parentPhone: "",
     homeAddress: "",
+    parentEmail: "",
   });
 
   const [status, setStatus] = useState({ loading: false, message: "" });
@@ -77,6 +78,7 @@ export default function AddStudent() {
         lga: "",
         parentPhone: "",
         homeAddress: "",
+        parentEmail: "",
       });
     } catch (error) {
       setStatus({ loading: false, message: "❌ Failed to add student." });
@@ -146,6 +148,16 @@ export default function AddStudent() {
             value={student.parentPhone}
             onChange={handleChange}
             placeholder="Parent Phone Number"
+            required
+            className="w-full border p-2 rounded"
+          />
+
+          <input
+            type="email"
+            name="parentEmail"
+            value={student.parentEmail}
+            onChange={handleChange}
+            placeholder="enter your email"
             required
             className="w-full border p-2 rounded"
           />

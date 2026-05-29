@@ -3,6 +3,7 @@ import { getClassData } from "../Service/OwnerService";
 import { useParams } from "react-router-dom";
 import { listStudent2 } from "../Service/Service";
 import "./ClassView.css";
+import OwnerNav from "./OwnerNav";
 
 const ClassView = () => {
   const [pageData, setPageData] = useState(null);
@@ -24,6 +25,7 @@ const ClassView = () => {
 
   return (
     <>
+      <OwnerNav />
       <div className="class-view-page">
         {pageData ? (
           <div className="class-header">{pageData?.className}</div>
@@ -55,21 +57,21 @@ const ClassView = () => {
             <span className="s2">
               Average attendance:{" "}
               <div className="value">
-                {pageData?.averageAttendance ?? "Loading..."}
+                {pageData?.averageAttendance || `${"n/a"}`}
               </div>
               %
             </span>
             <span className="s3">
               Average grade:{" "}
               <div className="value">
-                {pageData?.averageGrade ?? "Loading..."}
+                {pageData?.averageResult || `${"n/a"}`}
               </div>
               %
             </span>
             <span className="s4">
               Top student:{" "}
               <div className="value">
-                {pageData?.topStudentName || "Loading..."}
+                {pageData?.topStudentName || `${"n/a"}`}
               </div>
             </span>
           </div>

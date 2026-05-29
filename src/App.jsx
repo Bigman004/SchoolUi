@@ -20,6 +20,8 @@ import CheckPayment from "./Components/CheckPayment";
 import ChangePasswordRequest from "./Components/ChangePasswordRequest";
 import ClassView from "./Components/ClassView";
 import DeveloperPage from "./Components/Developer/DeveloperPage";
+import PastEventView from "./Components/Developer/PastEventView";
+import AddSchool from "./Components/Developer/AddSchool";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -64,6 +66,9 @@ function App() {
           element={<ChangePasswordRequest />}
         />
         <Route path="/developer" element={<DeveloperPage />} />
+        <Route path="/past_events" element={<PastEventView />} />
+        <Route path="/review_event/:date" element={<DeveloperPage />} />
+        <Route path="/add_school" element={<AddSchool />} />
       </Routes>
     </>
   );

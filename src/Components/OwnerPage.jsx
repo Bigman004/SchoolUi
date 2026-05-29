@@ -42,6 +42,7 @@ const OwnerPage = () => {
         setOwnerData(response);
       } catch (err) {
         console.error("Failed to load owner data:", err);
+        navigate("/login");
       } finally {
         setLoading(false);
       }

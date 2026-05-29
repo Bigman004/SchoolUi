@@ -1,0 +1,298 @@
+/* ============================================================
+   AddSchool.css
+   Scoped entirely to .add-school-page and .add-school-skeleton.
+   No global resets — zero bleed into other components.
+   ============================================================ */
+
+/* ── Design Tokens (scoped to this page only) ─────────────── */
+.add-school-page {
+  --dp-navy: #1a2340;
+  --dp-navy-mid: #263050;
+  --dp-ivory: #f7f4ee;
+  --dp-ivory-dark: #ede9e0;
+  --dp-amber: #e8a020;
+  --dp-amber-soft: #f5c36a;
+  --dp-amber-glow: #fff3d6;
+  --dp-amber-pale: #fff8ec;
+  --dp-text-mid: #4a5270;
+  --dp-text-light: #8a91ad;
+  --dp-green: #1a9e5c;
+  --dp-green-pale: #eafaf1;
+  --dp-red: #d94040;
+  --dp-red-pale: #fef0f0;
+
+  --dp-shadow-card: 0 2px 16px rgba(26, 35, 64, 0.08);
+  --dp-shadow-hover: 0 8px 32px rgba(26, 35, 64, 0.15);
+
+  --dp-t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --dp-t-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --dp-radius-sm: 6px;
+  --dp-radius-md: 10px;
+  --dp-radius-lg: 14px;
+}
+
+/* ── Skeleton loader ──────────────────────────────────────── */
+@keyframes add-school-shimmer {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+
+.add-school-skeleton {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(26, 35, 64, 0.18);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-school-skeleton::after {
+  content: "";
+  width: 420px;
+  max-width: 90vw;
+  height: 380px;
+  border-radius: 14px; /* dp-radius-lg */
+  background: linear-gradient(90deg, #ede9e0 25%, #f7f4ee 50%, #ede9e0 75%);
+  background-size: 1200px 100%;
+  animation: add-school-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+@keyframes add-school-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-school-page {
+  min-height: 100vh;
+  background-color: var(--dp-ivory);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px 80px;
+  animation: add-school-page-in 0.45s var(--dp-t) both;
+}
+
+/* ── Headings ─────────────────────────────────────────────── */
+.add-school-page h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--dp-navy);
+  margin: 0 0 6px;
+  position: relative;
+}
+
+.add-school-page h1::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--dp-amber);
+  margin-top: 8px;
+}
+
+.add-school-page > p {
+  color: var(--dp-text-light);
+  font-size: 0.92rem;
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+/* ── Form card ────────────────────────────────────────────── */
+@keyframes add-school-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.add-school-page .add-school-form {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border: 1px solid var(--dp-ivory-dark);
+  border-radius: var(--dp-radius-lg);
+  box-shadow: var(--dp-shadow-card);
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: add-school-card-in 0.5s var(--dp-t) 0.1s both;
+  transition: box-shadow var(--dp-t);
+}
+
+.add-school-page .add-school-form:focus-within {
+  box-shadow: var(--dp-shadow-hover);
+}
+
+/* ── Form groups ──────────────────────────────────────────── */
+.add-school-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.add-school-page .form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dp-text-mid);
+  user-select: none;
+}
+
+/* ── Inputs ───────────────────────────────────────────────── */
+.add-school-page .form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--dp-ivory-dark);
+  border-radius: var(--dp-radius-md);
+  background: var(--dp-ivory);
+  color: var(--dp-navy);
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color var(--dp-t),
+    background var(--dp-t),
+    box-shadow var(--dp-t);
+}
+
+.add-school-page .form-group input::placeholder {
+  color: var(--dp-text-light);
+  font-size: 0.88rem;
+}
+
+.add-school-page .form-group input:focus {
+  border-color: var(--dp-amber);
+  background: var(--dp-amber-pale);
+  box-shadow: 0 0 0 3px var(--dp-amber-glow);
+}
+
+.add-school-page .form-group input:hover:not(:focus) {
+  border-color: var(--dp-amber-soft);
+}
+
+/* ── Submit button ────────────────────────────────────────── */
+@keyframes add-school-btn-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 160, 32, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(232, 160, 32, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 160, 32, 0);
+  }
+}
+
+.add-school-page .add-school-form button[type="submit"] {
+  align-self: flex-start;
+  padding: 11px 28px;
+  border: none;
+  border-radius: var(--dp-radius-md);
+  background: var(--dp-amber);
+  color: var(--dp-navy);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    background var(--dp-t),
+    transform var(--dp-t-spring),
+    box-shadow var(--dp-t);
+}
+
+.add-school-page .add-school-form button[type="submit"]:hover {
+  background: var(--dp-amber-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(232, 160, 32, 0.35);
+}
+
+.add-school-page .add-school-form button[type="submit"]:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+.add-school-page .add-school-form button[type="submit"]:focus-visible {
+  outline: 3px solid var(--dp-amber-soft);
+  outline-offset: 3px;
+}
+
+/* Pulse animation when result appears (applied via JS if needed, or on load) */
+.add-school-page .add-school-form button[type="submit"]:focus {
+  animation: add-school-btn-pulse 0.7s ease-out;
+}
+
+/* ── Result / error message ───────────────────────────────── */
+@keyframes add-school-msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-school-page .add-school-message {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.add-school-page .add-school-message p {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: var(--dp-radius-sm);
+  padding: 8px 14px;
+  animation: add-school-msg-in 0.28s var(--dp-t) both;
+}
+
+/* Success state — message contains a username */
+.add-school-page .add-school-message p:not(:empty) {
+  background: var(--dp-green-pale);
+  color: var(--dp-green);
+  border: 1px solid rgba(26, 158, 92, 0.2);
+}
+
+/* Error state — controlled by .add-school-message having an error child */
+.add-school-page .add-school-message p.error,
+.add-school-page .add-school-message p[data-error="true"] {
+  background: var(--dp-red-pale);
+  color: var(--dp-red);
+  border: 1px solid rgba(217, 64, 64, 0.18);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .add-school-page .add-school-form {
+    padding: 28px 18px 24px;
+  }
+
+  .add-school-page .add-school-form button[type="submit"] {
+    width: 100%;
+    text-align: center;
+  }
+}

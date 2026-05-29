@@ -33,6 +33,7 @@ const EditProfile = () => {
     setStatus({ loading: false, message: "✅ uploaded changes successful!" });
   };
   const handleChange = (e) => {
+    if (status.loading) return;
     const { name, value } = e.target;
     setStudent((prev) => ({ ...prev, [name]: value }));
   };
