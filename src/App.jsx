@@ -18,6 +18,10 @@ import Error1 from "./Components/Error/Error1";
 import Billing from "./Components/Billing";
 import CheckPayment from "./Components/CheckPayment";
 import ChangePasswordRequest from "./Components/ChangePasswordRequest";
+import ClassView from "./Components/ClassView";
+import DeveloperPage from "./Components/Developer/DeveloperPage";
+import PastEventView from "./Components/Developer/PastEventView";
+import AddSchool from "./Components/Developer/AddSchool";
 import OwnerChangePassword from "./Components/OwnerChangePassword";
 
 function App() {
@@ -37,6 +41,7 @@ function App() {
       <Routes>
         <Route path="/teacher_page" element={<TeacherPage />} />
         <Route path="/result/:info" element={<Result />} />
+        <Route path="/class_page/:className" element={<ClassView />} />
         <Route path="/add_student" element={<AddStudent />} />
         <Route path="/student" element={<Student />} />
         <Route path="/edit/:id" element={<EditProfile />} />
@@ -61,6 +66,10 @@ function App() {
           path="/change-password-request"
           element={<ChangePasswordRequest />}
         />
+        <Route path="/developer" element={<DeveloperPage />} />
+        <Route path="/past_events" element={<PastEventView />} />
+        <Route path="/review_event/:date" element={<DeveloperPage />} />
+        <Route path="/add_school" element={<AddSchool />} />
         <Route
           path="/admin-change-password"
           element={<OwnerChangePassword />}

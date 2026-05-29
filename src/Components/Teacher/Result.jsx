@@ -10,17 +10,19 @@ import { useParams } from "react-router-dom";
 const Result = () => {
   const { info } = useParams();
   const [result, setResult] = useState({});
+  const [studentId, term, type] = info.split("-");
   useEffect(() => {
     async function getResult() {
-      const response = await getStudentResult(info);
+      const response = await getStudentResult(studentId, term, type);
       setResult(response);
     }
     getResult();
   }, []);
-  let { id, studentId, term, type, ...resultData } = result;
+  let { id, ...resultData } = result;
   const [status, setStatus] = useState({ loading: false, message: "" });
 
   const handleChange = (e, termSetter, termData) => {
+    setStatus({ ...status, message: "" });
     const { name, value } = e.target;
     if (value === "" || (/^\d+$/.test(value) && value <= 100)) {
       termSetter({ ...termData, [name]: value });
@@ -42,7 +44,12 @@ const Result = () => {
           className="upload-result-form"
           action={() => {
             async function postResult() {
-              const response = await postResultbyterm(info, resultData);
+              const response = await postResultbyterm(
+                studentId,
+                term,
+                type,
+                result,
+              );
               return response;
             }
             setStatus({ loading: true, message: "" });
@@ -75,7 +82,7 @@ const Result = () => {
             className="submit-btn"
             disabled={status.loading}
           >
-            Upload First Term
+            Upload {term} {type}
           </button>
           {status.message && (
             <p className="text-center mt-3 font-medium">{status.message}</p>

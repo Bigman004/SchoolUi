@@ -58,22 +58,29 @@ export const postLoginDetails2 = async (regNo, password) => {
   );
   return response;
 };
-export const getStudentResult = async (info) => {
-  const response = await Service.get("/result/" + info, {
+export const getStudentResult = async (studentId, term, type) => {
+  const response = await Service.get(
+    `/result/${studentId}?term=${term}&type=${type}`,
+    {
+      withCredentials: true,
+    },
+  );
+  return response.data;
+};
+export const listResult = async (term, type) => {
+  const response = await Service.get(`/result/?term=${term}&type=${type}`, {
     withCredentials: true,
   });
   return response.data;
 };
-export const listResult = async () => {
-  const response = await Service.get("/result/", {
-    withCredentials: true,
-  });
-  return response.data;
-};
-export async function postResultbyterm(info, result) {
-  const response = await Service.post("result/" + info, result, {
-    withCredentials: true,
-  });
+export async function postResultbyterm(studentId, term, type, result) {
+  const response = await Service.post(
+    `/result/${studentId}?term=${term}&type=${type}`,
+    result,
+    {
+      withCredentials: true,
+    },
+  );
   return response;
 }
 export async function getStudentDetails(id) {

@@ -33,7 +33,7 @@ export const TeacherPage = () => {
       try {
         const response = await listStudent2();
         setTeacher(response.teacher);
-        setStudentList(response.list ?? []);
+        setStudentList(response.list);
       } catch (err) {
         console.error("Failed to load data:", err);
         navigate("/error_page");
@@ -152,7 +152,7 @@ export const TeacherPage = () => {
             </span>
           </div>
 
-          <div className="table-scroll">
+          <div className="teacher-table-scroll">
             <table>
               <thead>
                 <tr>

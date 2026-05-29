@@ -58,7 +58,8 @@ const Login = () => {
                       navigate("/teacher_page");
                     else if (response.data.message === "ADMIN") {
                       navigate("/owner_page");
-                    }
+                    } else if (response.data.message === "DEVELOPER")
+                      navigate("/developer");
                   } else {
                     setLoginMessage("invalid credentials");
                   }

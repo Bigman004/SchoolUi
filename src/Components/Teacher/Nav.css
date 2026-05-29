@@ -1,15 +1,60 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap");
+/* ============================================================
+   Nav.css — DeveloperNav
+   Scoped to .main-navbar and its descendants only.
+   Zero global resets (box-sizing / margin / padding live on
+   the component root, not on * — preserving other components).
+   ============================================================ */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap");
+
+/* ── Design tokens — local to navbar only ─────────────────── */
+.main-navbar {
+  /* Colours */
+  --nav-ink: #0f1117;
+  --nav-ink-mid: #3a3f52;
+  --nav-surface: #ffffff;
+  --nav-surface-sub: rgba(255, 255, 255, 0.72);
+  --nav-accent: #e8a020; /* amber from the app palette */
+  --nav-accent-soft: rgba(232, 160, 32, 0.12);
+  --nav-hover-bg: rgba(15, 17, 23, 0.055);
+  --nav-active-bg: #0f1117;
+  --nav-active-fg: #ffffff;
+
+  /* Shadows */
+  --nav-shadow:
+    0 2px 8px rgba(15, 17, 23, 0.06), 0 8px 32px rgba(15, 17, 23, 0.09);
+  --nav-shadow-menu:
+    0 4px 16px rgba(15, 17, 23, 0.07), 0 16px 48px rgba(15, 17, 23, 0.11);
+
+  /* Radii */
+  --nav-radius-pill: 999px;
+  --nav-radius-card: 20px;
+  --nav-radius-item: 12px;
+
+  /* Motion */
+  --nav-t-fast: 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-t-base: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-t-spring: 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Typography */
+  --nav-font: "DM Sans", system-ui, sans-serif;
 }
 
-/* ── Floating pill navbar ── */
+/* ── Root bar ─────────────────────────────────────────────── */
+@keyframes nav-drop-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 .main-navbar {
   position: fixed;
-  top: 24px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -18,157 +63,330 @@
   align-items: center;
   gap: 4px;
 
-  background: #ffffff;
-  border-radius: 999px;
-  padding: 8px 8px 8px 16px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(0, 0, 0, 0.06);
+  background: var(--nav-surface);
+  border-radius: var(--nav-radius-pill);
+  padding: 7px 7px 7px 14px;
+  box-shadow: var(--nav-shadow);
 
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--nav-font);
   white-space: nowrap;
+
+  /* Hardware-accelerated from the start */
+  will-change: transform;
+  animation: nav-drop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  /* Smooth glass on scroll (optional — browsers that support it) */
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
 }
 
-/* ── Logo circle ── */
-.nav-logo {
-  width: 40px;
-  height: 40px;
-  background: #1a1a1a;
+/* Subtle top-border shimmer */
+.main-navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+}
+
+/* ── Logo circle ──────────────────────────────────────────── */
+.main-navbar .nav-logo {
+  width: 36px;
+  height: 36px;
+  background: var(--nav-active-bg);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   flex-shrink: 0;
-  margin-right: 8px;
+  margin-right: 6px;
   user-select: none;
+  transition: transform var(--nav-t-spring);
 }
 
-/* ── Nav links ── */
-.nav-links {
+.main-navbar .nav-logo:hover {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+/* ── Nav links container ──────────────────────────────────── */
+.main-navbar .nav-links {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-.nav-links a {
+/* ── Individual nav link ──────────────────────────────────── */
+.main-navbar .nav-links a {
+  position: relative;
   text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 400;
-  padding: 8px 14px;
-  border-radius: 999px;
-  transition: background 0.18s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--nav-ink-mid);
+  padding: 7px 13px;
+  border-radius: var(--nav-radius-pill);
   letter-spacing: 0.01em;
+  transition:
+    background var(--nav-t-fast),
+    color var(--nav-t-fast);
+  /* Prevent layout shift on font-weight change */
+  -webkit-font-smoothing: antialiased;
 }
 
-.nav-links a:hover {
-  background: rgba(0, 0, 0, 0.06);
+.main-navbar .nav-links a:hover {
+  background: var(--nav-hover-bg);
+  color: var(--nav-ink);
 }
 
-.nav-links a.active {
-  background: #1a1a1a;
-  color: #ffffff;
+.main-navbar .nav-links a:focus-visible {
+  outline: 2px solid var(--nav-accent);
+  outline-offset: 2px;
 }
 
-/* ── Welcome pill ── */
-.welcome-text {
-  margin-left: 8px;
-  background: #1a1a1a;
-  color: #ffffff;
-  font-size: 0.85rem;
+/* Active — set by React Router's NavLink */
+.main-navbar .nav-links a.active {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
   font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 999px;
-  letter-spacing: 0.01em;
+}
+
+/* Amber underline dot on active — a refined accent beat */
+.main-navbar .nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--nav-accent);
+}
+
+/* ── Welcome pill ─────────────────────────────────────────── */
+.main-navbar .welcome-text {
+  margin-left: 6px;
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--nav-radius-pill);
+  letter-spacing: 0.025em;
   flex-shrink: 0;
   cursor: default;
   user-select: none;
+  font-family: var(--nav-font);
+  /* Subtle amber left-border accent */
+  box-shadow: inset 3px 0 0 var(--nav-accent);
+  transition: box-shadow var(--nav-t-base);
 }
 
-/* ── Hamburger button ── */
-.open-sidebar-button {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 50%;
-  transition: background 0.15s;
+.main-navbar .welcome-text:hover {
+  box-shadow:
+    inset 3px 0 0 var(--nav-accent),
+    0 0 0 2px var(--nav-accent-soft);
+}
+
+/* ── Hamburger button ─────────────────────────────────────── */
+.main-navbar .open-sidebar-button {
+  display: none; /* desktop: hidden */
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  line-height: 0;
+  transition:
+    background var(--nav-t-fast),
+    transform var(--nav-t-spring);
 }
 
-.open-sidebar-button:hover {
-  background: rgba(0, 0, 0, 0.06);
+.main-navbar .open-sidebar-button:hover {
+  background: var(--nav-hover-bg);
 }
 
-/* ── Hide checkbox ── */
+.main-navbar .open-sidebar-button:active {
+  transform: scale(0.9);
+}
+
+.main-navbar .open-sidebar-button:focus-visible {
+  outline: 2px solid var(--nav-accent);
+  outline-offset: 2px;
+}
+
+.main-navbar .open-sidebar-button svg {
+  display: block;
+  transition: transform var(--nav-t-spring);
+}
+
+/* Rotate icon when menu is open */
+.main-navbar .open-sidebar-button[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* ── Hidden checkbox (legacy markup — keep it invisible) ──── */
 #sidebar-active {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* ── Mobile ── */
+/* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  @keyframes nav-drop-in-mobile {
+    from {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .main-navbar {
-    top: 16px;
-    left: 16px;
-    right: 16px;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    /* reset centering from desktop */
     transform: none;
-    width: calc(100% - 32px);
+    width: auto;
     justify-content: space-between;
-    padding: 8px 8px 8px 12px;
-    border-radius: 999px;
+    padding: 7px 7px 7px 10px;
+    animation-name: nav-drop-in-mobile;
+    will-change: auto; /* release hint after animation */
   }
 
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transform-origin: top center;
-
-    /* hidden state */
-    opacity: 0;
-    transform: scaleY(0.9) translateY(-8px);
-    pointer-events: none;
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
+  /* Logo: no right margin on mobile */
+  .main-navbar .nav-logo {
+    margin-right: 0;
   }
 
-  .nav-links.open {
-    opacity: 1;
-    transform: scaleY(1) translateY(0);
-    pointer-events: all;
-  }
-
-  .nav-links a {
-    padding: 12px 16px;
-    font-size: 0.92rem;
-    border-radius: 12px;
-  }
-
-  .nav-links a:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .open-sidebar-button {
-    display: flex;
-  }
-
-  .welcome-text {
+  /* Welcome pill: hide on narrow screens */
+  .main-navbar .welcome-text {
     display: none;
   }
 
-  .nav-logo {
-    margin-right: 0;
+  /* Hamburger: visible */
+  .main-navbar .open-sidebar-button {
+    display: flex;
+  }
+
+  /* ── Dropdown menu ──────────────────────────────────────── */
+  @keyframes nav-menu-open {
+    from {
+      opacity: 0;
+      transform: scaleY(0.88) translateY(-10px);
+      filter: blur(2px);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .main-navbar .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+
+    background: var(--nav-surface);
+    border-radius: var(--nav-radius-card);
+    padding: 8px;
+    box-shadow: var(--nav-shadow-menu);
+    border: 1px solid rgba(15, 17, 23, 0.06);
+
+    transform-origin: top center;
+
+    /* Hidden state */
+    opacity: 0;
+    transform: scaleY(0.88) translateY(-10px);
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity var(--nav-t-base),
+      transform var(--nav-t-base),
+      filter var(--nav-t-base),
+      visibility 0s linear var(--nav-t-base); /* delayed hide */
+  }
+
+  .main-navbar .nav-links.open {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    transition:
+      opacity var(--nav-t-base),
+      transform var(--nav-t-base),
+      filter var(--nav-t-base),
+      visibility 0s linear 0s; /* immediate show */
+  }
+
+  .main-navbar .nav-links a {
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    border-radius: var(--nav-radius-item);
+    color: var(--nav-ink);
+  }
+
+  /* Remove the dot accent on mobile — more room needed */
+  .main-navbar .nav-links a.active::after {
+    display: none;
+  }
+
+  .main-navbar .nav-links a.active {
+    background: var(--nav-active-bg);
+    color: var(--nav-active-fg);
+    border-left: 3px solid var(--nav-accent);
+    padding-left: 11px; /* optical compensation for the border */
+  }
+
+  /* Stagger link entrance inside open menu */
+  .main-navbar .nav-links.open a:nth-child(1) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0s both;
+  }
+  .main-navbar .nav-links.open a:nth-child(2) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0.04s both;
+  }
+  .main-navbar .nav-links.open a:nth-child(3) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0.08s both;
+  }
+  .main-navbar .nav-links.open a:nth-child(4) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0.12s both;
+  }
+  .main-navbar .nav-links.open a:nth-child(5) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0.16s both;
+  }
+  .main-navbar .nav-links.open a:nth-child(6) {
+    animation: nav-menu-open 0.24s var(--nav-t-base) 0.2s both;
+  }
+}
+
+/* ── Reduced motion — accessibility ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .main-navbar,
+  .main-navbar .nav-links,
+  .main-navbar .nav-links a,
+  .main-navbar .nav-logo,
+  .main-navbar .open-sidebar-button {
+    animation: none !important;
+    transition: none !important;
   }
 }

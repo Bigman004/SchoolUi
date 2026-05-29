@@ -2,7 +2,7 @@ import axios from "axios";
 const REST_API_BASE_URL = "http://localhost:8080";
 // the login used for the owner is at the file dedicated for the teacher user
 const OwnerService = axios.create({
-  baseURL: "https://java-application-latest-ywhd.onrender.com",
+  baseURL: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -48,4 +48,17 @@ export async function addTeacher(teacher) {
   });
   return response.data;
 }
+export async function deleteStudent(id) {
+  const response = await OwnerService.delete("teacher/delete/" + id, {
+    withCredentials: true,
+  });
+  return response.data;
+}
+export async function getClassData(className) {
+  const response = await OwnerService.get("api/class_page/" + className, {
+    withCredentials: true,
+  });
+  return response.data;
+}
+
 export default OwnerService;

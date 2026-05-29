@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import Nav from "./Nav";
-import "./ReviewAttendancePage.css";
+import DeveloperNav from "./DeveloperNav";
+import "../Teacher/ReviewAttendancePage.css";
 import { useNavigate } from "react-router-dom";
 
-const ReviewAttendancePage = () => {
+const PastEventView = () => {
   const [dateList, setDateList] = useState([]);
-  const startTerm = new Date("2026-05-12");
-  const endTerm = new Date("2026-07-18");
+  const startTerm = new Date("2026-05-17");
+  const endTerm = new Date("2026-05-30");
   const navigate = useNavigate();
   const monthNames = [
     "January",
@@ -58,13 +58,13 @@ const ReviewAttendancePage = () => {
 
   const handleClick = (date) => {
     // Fix 3: Use actual date values from the Date object
-    const str = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-    navigate(`/review_attendance_date/${str}`);
+    const str = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    navigate(`/review_event/${str}`);
   };
 
   return (
     <>
-      <Nav />
+      <DeveloperNav />
       <div className="review-attendance-page">
         <h1>Review Attendance</h1>
         {dateList.map(({ month, days }, index) => {
@@ -105,4 +105,4 @@ const ReviewAttendancePage = () => {
   );
 };
 
-export default ReviewAttendancePage;
+export default PastEventView;
