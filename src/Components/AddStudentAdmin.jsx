@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "./AddStudent.css";
-import Nav from "./Nav";
-import { addStudent } from "../../Service/Service";
+import "./Teacher/AddStudent.css";
+import OwnerNav from "./OwnerNav";
+import { addStudentToSchool } from "../Service/OwnerService";
 import { useParams } from "react-router-dom";
 
-export default function AddStudent() {
+export default function AddStudentAdmin() {
   const [student, setStudent] = useState({
     firstName: "",
     lastName: "",
@@ -16,7 +15,7 @@ export default function AddStudent() {
     homeAddress: "",
     parentEmail: "",
   });
-
+  const { studentClass } = useParams();
   const [status, setStatus] = useState({ loading: false, message: "" });
   const [selectedState, setSelectedState] = useState("");
   const stateList = [
@@ -68,7 +67,7 @@ export default function AddStudent() {
     setStatus({ loading: true, message: "" });
 
     try {
-      const response = await addStudent(student);
+      const response = await addStudentToSchool(studentClass, student);
 
       setStatus({ loading: false, message: "✅ Student added successfully!" });
       setStudent({
@@ -88,7 +87,7 @@ export default function AddStudent() {
 
   return (
     <>
-      <Nav />
+      <OwnerNav />
       <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
         <h2 className="text-2xl font-semibold mb-4 text-center">Add Student</h2>
         <form onSubmit={handleSubmit} className="space-y-3">

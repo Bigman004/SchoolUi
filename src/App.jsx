@@ -23,6 +23,7 @@ import DeveloperPage from "./Components/Developer/DeveloperPage";
 import PastEventView from "./Components/Developer/PastEventView";
 import AddSchool from "./Components/Developer/AddSchool";
 import OwnerChangePassword from "./Components/OwnerChangePassword";
+import AddStudentAdmin from "./Components/AddStudentAdmin";
 
 function App() {
   const [toggleButton, setToggleButton] = useState(false);
@@ -43,6 +44,10 @@ function App() {
         <Route path="/result/:info" element={<Result />} />
         <Route path="/class_page/:className" element={<ClassView />} />
         <Route path="/add_student" element={<AddStudent />} />
+        <Route
+          path="/add_student_admin/:studentClass"
+          element={<AddStudentAdmin />}
+        />
         <Route path="/student" element={<Student />} />
         <Route path="/edit/:id" element={<EditProfile />} />
         <Route path="/result_page" element={<ResultList />} />

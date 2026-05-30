@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { listStudent2 } from "../Service/Service";
 import "./ClassView.css";
 import OwnerNav from "./OwnerNav";
+import { Link } from "react-router-dom";
 
 const ClassView = () => {
   const [pageData, setPageData] = useState(null);
@@ -78,7 +79,11 @@ const ClassView = () => {
           <div className="student-name">Student Name</div>
           <div className="state-of-origin">State of Origin</div>
           <div className="parent-phone">Parent Phone</div>
-          <div className="class-view-header-right">add student</div>
+          <div className="class-view-header-right">
+            <Link to={`/add_student_admin/${pageData?.className}`}>
+              Add Student
+            </Link>
+          </div>
         </div>
 
         <div className="class-view-list">
@@ -89,8 +94,7 @@ const ClassView = () => {
               </div>
               <div className="state-of-origin">{student.stateOfOrigin}</div>
               <div className="parent-phone">{student.parentPhone}</div>
-              <div className="action">delete</div>
-              <div className="edit">edit</div>
+              <button className="delete-action">delete</button>
             </div>
           )) || (
             <div className="class-view-list-skeleton">Loading students...</div>

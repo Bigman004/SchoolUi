@@ -48,8 +48,18 @@ export async function addTeacher(teacher) {
   });
   return response.data;
 }
+export async function addStudentToSchool(classOfStudent, student) {
+  const response = await OwnerService.post(
+    `api/add_student?classOfStudent=${classOfStudent}`,
+    student,
+    {
+      withCredentials: true,
+    },
+  );
+  return response.data;
+}
 export async function deleteStudent(id) {
-  const response = await OwnerService.delete("teacher/delete/" + id, {
+  const response = await OwnerService.delete("api/delete_student/" + id, {
     withCredentials: true,
   });
   return response.data;

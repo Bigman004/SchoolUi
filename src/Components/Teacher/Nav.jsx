@@ -28,7 +28,10 @@ const Nav = () => {
         <NavLink to="/student" onClick={() => setMenuOpen(false)}>
           Students
         </NavLink>
-        <NavLink to="/add_student" onClick={() => setMenuOpen(false)}>
+        <NavLink
+          to={`/add_student/${undefined}`}
+          onClick={() => setMenuOpen(false)}
+        >
           Add Student
         </NavLink>
         <NavLink to="/result_page" onClick={() => setMenuOpen(false)}>
