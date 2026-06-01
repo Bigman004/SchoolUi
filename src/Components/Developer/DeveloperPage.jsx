@@ -157,11 +157,11 @@ const DeveloperPage = () => {
             <>
               <p>Application Information</p>
               <span className="total-user">
-                Total Users: {developerData?.totalUsers || 12}
+                Total Users: {developerData?.totalUsers || "n/a"}
               </span>
               <span className="total-req">
                 {" "}
-                Total Requests: {developerData?.page?.totalElements}
+                Total Requests: {developerData?.page?.totalElements || "n/a"}
               </span>
             </>
           ) : (
